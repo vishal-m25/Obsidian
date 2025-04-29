@@ -1,0 +1,10 @@
+{
+  "obsidian-latex-suite:latex-suite-enable-all-features": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "L"
+    }
+  ]
+}

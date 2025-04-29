@@ -1,0 +1,32 @@
+
+# Flatpak app install
+```bash
+flatpak install flathub md.obsidian.Obsidian
+```
+
+# Obsidian run command
+```bash
+flatpak install flathub md.obsidian.Obsidian
+```
+
+# logs of the computer
+```shell
+journalctl
+
+journalctl -p err -b # display only error logs
+
+journalctl --since [today / 10:00  / ]
+```
+
+
+
+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
+
+
+hypr-lock, sway-lock --> for lock screen
+
+powertop  --> power saver
+
+
+## sdu -->  storage utilization finder
+

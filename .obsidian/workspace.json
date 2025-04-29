@@ -1,0 +1,235 @@
+{
+  "main": {
+    "id": "a64c4f892cc640dd",
+    "type": "split",
+    "children": [
+      {
+        "id": "62465943a02d4600",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ae8c9ec3f46ef670",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Aptitude formulas.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Aptitude formulas"
+            }
+          },
+          {
+            "id": "a33f9d4dab30033c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "recall.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "recall"
+            }
+          },
+          {
+            "id": "3da8ef658df28424",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "recall.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "recall"
+            }
+          },
+          {
+            "id": "06c7e5589a341c44",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Topics to know.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Topics to know"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "22fbf8aa44e2321e",
+    "type": "split",
+    "children": [
+      {
+        "id": "3ff6284f0b3c7490",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "81bec6e31916f035",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "5b08977f3decb7e0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "event loop",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "6a4b4ba394a2318a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "32dd3975d31bf67f",
+    "type": "split",
+    "children": [
+      {
+        "id": "45e72467ae44ea8f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c46a163937979a46",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "AMCAT.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for AMCAT"
+            }
+          },
+          {
+            "id": "d59e1edea3f677a2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Configurations.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Configurations"
+            }
+          },
+          {
+            "id": "cd1cfd69dd09e91a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "142f43bd6a865c8b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Aptitude formulas.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Aptitude formulas"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "markdown-importer:Open format converter": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "3da8ef658df28424",
+  "lastOpenFiles": [
+    "Full stack.md",
+    "OOPs.md",
+    "recall.md",
+    "Spring.md",
+    "Pasted image 20250429094750.png",
+    "Project Notes.md",
+    "Pasted image 20250429094246.png",
+    "Topics to know.md",
+    "AMCAT.md",
+    "Aptitude formulas.md",
+    "Company exp.md",
+    "DSA.md",
+    "Pasted image 20250429094514.png",
+    "Configurations.md",
+    "OOPs",
+    "Untitled",
+    "cars.md",
+    "Untitled.canvas"
+  ]
+}
