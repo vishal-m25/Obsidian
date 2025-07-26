@@ -1,5 +1,5 @@
 
-I am Vishal M, and I’m currently pursuing my B.Tech Artificial Intelligence and Machine Learning degree at Kongu Engineering College, Perundurai. I have completed my schooling in Agaram public school,Dharapuram. I'm passionate about solving real-world problems with the latest technology available and also love working across both frontend and backend development, making me a well-rounded full-stack developer.
+I am Vishal M, from kunnathur and I’m currently pursuing my B.Tech Artificial Intelligence and Machine Learning degree at Kongu Engineering College, Perundurai. I'm passionate about solving real-world problems with the latest technology available and also love working across both frontend and backend development, making me a well-rounded full-stack developer.
 
 I’ve had hands-on industry experience through internships, including my recent role as an LLM fine-tuner and Full-Stack Developer at Centillion Labs, where I built and integrated personalized chatbots powered by LLMs into company websites with the help of Vertex AI and the concept of grounding. And, I worked as a Frontend Developer at Genpixels, where I contributed to enhancing user experience by implementing dynamic and interactive website features.
 
@@ -54,4 +54,6 @@ I'm now looking forward to roles where I can continue to innovate and grow, espe
 	- use gready
 - [Valid parentheses](https://leetcode.com/problems/valid-parentheses/description/)
 - [longest substring without repeating characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-- 
+## Openmynz
+ - dangling pointer 
+	 a pointer pointing to a space where the memory is deallocated. 

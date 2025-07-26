@@ -1,10 +1,49 @@
+
+--- plugin-prettier: true ---
+
 # General
 
  - Node.js is a run time environment that used browser engine to run the server in V8 JavaScript engine , the core of chrome browser outside the browser to provide high performance
  - Express is a node js framework
 
 
-
+## Requests
+- ### options 
+| **Method**  | **Purpose**                                  |
+| ----------- | -------------------------------------------- |
+| **GET**     | Retrieve data (no modification).             |
+| **POST**    | Create a new resource (send data to server). |
+| **PUT**     | Update/replace an existing resource.         |
+| **PATCH**   | Partially update a resource.                 |
+| **DELETE**  | Remove a resource.                           |
+| **OPTIONS** | Check supported HTTP methods for a resource. |
+| **HEAD**    | Like GET but returns only headers (no body). |
+- ### structure 
+| **Component** | **Description**                               |
+| ------------- | --------------------------------------------- |
+| **Method**    | The action to perform (GET, POST, etc.)       |
+| **URL**       | The resource address (endpoint).              |
+| **Headers**   | Meta-information (content type, auth, etc.).  |
+| **Body**      | Data sent with the request (for POST/PUT).    |
+| **Params**    | Data in URL (query params or path variables). |
+## Status code 
+| **Code** | **Meaning**                    | **Description**                                  |
+| -------- | ------------------------------ | ------------------------------------------------ |
+| **200**  | **OK**                         | Request succeeded, response contains the result. |
+| **201**  | **Created**                    | Resource successfully created (e.g., POST).      |
+| **204**  | **No Content**                 | Request succeeded, but no response body.         |
+| **301**  | **Moved Permanently**          | Resource has been permanently moved.             |
+| **302**  | **Found** (Temporary Redirect) | Resource temporarily moved to another URL.       |
+| **400**  | **Bad Request**                | Invalid request from the client.                 |
+| **401**  | **Unauthorized**               | Authentication required or failed.               |
+| **403**  | **Forbidden**                  | Request is understood but refused by the server. |
+| **404**  | **Not Found**                  | Resource not found.                              |
+| **405**  | **Method Not Allowed**         | HTTP method not supported for this endpoint.     |
+| **409**  | **Conflict**                   | Conflict with the current state of the resource. |
+| **500**  | **Internal Server Error**      | Generic server-side error.                       |
+| **502**  | **Bad Gateway**                | Invalid response from upstream server.           |
+| **503**  | **Service Unavailable**        | Server is currently unavailable or overloaded.   |
+| **504**  | **Gateway Timeout**            | Server did not receive a timely response.        |
 
 ## JS
 - types of function
@@ -179,3 +218,92 @@ obj.speak();
 ### Object based used when you want to group and export multiple handlers
 
 
+
+
+
+
+### login page
+```javascript
+async register(email,pass){
+const 
+}
+```
+
+
+### To get apps password in gmail
+
+
+
+
+### node mailer
+```js
+const nodemailer=require('nodemailer');
+const transort =nodemailer.createTransport({
+service:'gmail
+,
+auth{
+user:'mail',
+pass:'pass'
+},
+});
+
+const otp=123;
+const mailOptions={
+from:"mail@gmail.com",
+tp:'mail2@g,ail.com',
+subject:'aasdf',
+html:`
+	<h1>yout otp is : ${otp}</h1>
+	`
+	};
+transport.sendMail(mailOptions);
+```
+
+
+### .env files
+
+```md
+make sure to add this in the .gitignore file
+for accessing use `process.env.EMAIL`
+
+```
+
+
+### password hasing
+```js
+const jwt=require('jsonwebtoken');
+constzn
+```
+
+
+
+### ways to use middlewares
+
+- a common middlewares for each routes
+- use router.use() method to include common middleware.
+- for many middleware
+	- use multiple render.use()
+	- using array of middlewares
+
+
+### handle errors in nodejs express
+```js
+app.use((err,req,res,next)=>{
+console.error(err.stack);
+res.statuc(500).send('something breoke');
+})
+```
+
+### passing data between middlewares
+```js
+const cm1=(req,res,next)=>{
+const data="asdf";
+console.log("cm1:"+data);
+req.value=234;
+next(data);
+}
+const cm2=(data,req,res)=>{
+const data="asdf";
+console.log("cm2:"+data+req.value);
+}
+```

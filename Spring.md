@@ -3,8 +3,24 @@ Spring is a Java framework that was created with the aim of facilitating the dev
 
 
 
+## MVC
+M - model
+V - view
+C - controller
 
+## Spring boot layers
+ - controller  == response for the request
+ - service  == business logic
+ - repository
+ - data source
 
+## Routes:
+	- static
+	- group
+	- dynamic
+	- query
+	- request payload
+	- wild card
 
 
 

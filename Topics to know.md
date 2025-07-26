@@ -1,8 +1,11 @@
+
+
 ## 1. golden ratio
 	golden proportion or the divine proportion, is a ratio between two numbers that equals approximately 1.618
 
  
-
+## interpolation 
+ - using `{}` to print a variable in html
 
 # JAVA
 ### constant pool 
@@ -18,10 +21,15 @@
 | Shallow Copy stores the copy of the original object and points the references to the objects. | Deep copy stores the copy of the original object and recursively copies the objects as well. |
 | A shallow copy is faster.                                                                     | Deep copy is comparatively slower.                                                           |
 
+### Evaluation metrics
+- #### accuracy
+	- It calculated by dividing models correct predictions with the total predictions 
+- #### Precision
+	- Measure the proportion of correctly predicted positive predictions out of all instances predicted as positive
+- #### Recall
+	- Measure the proportion of all the correctly predicted positive out of count of actual positive instances
+- #### F1 score
+	- Mean of both precision and recall
 
-# JS
-
-## Event Loop 
-	 to handle asynchronous operations such as fetching data from an API, handling user events, or setting timeouts without pausing execution. This is made possible by the event loop.
-
-
+## API
+- a set of rules and specifications that allow different software systems to communicate

@@ -1,4 +1,111 @@
 
+### arrays
+- two pointers
+- sliding window
+- max subarray sum (kadame algo)
+- leetcode -- sort an array of 0's 1's 2's
+- subsets(recursion)
+- transpose
+- 90 degree of the matrix
+- spiral order traversal
+### stack
+- valid parenthesis
+- monotonic stack (next greater element , next smaller element)
+- clumsy factorial
+- 
+
+### bit manipulation
+- count number of set bits
+- set/unset bit
+- XOR
+- negative numbers on bits
+
+### binary search
+- on rotated array
+- on answer space( koko eating bananas, min days to make m bouquets)
+- implementing upper/lower bound
+
+### sorting algo
+- insertion
+- bubble
+- selection
+- merge
+
+### trees
+- all traversals
+- height ( diameter, depth, max path sum)
+- Lowest common ancestor
+- build tree from inorder/ preorder or other traversals
+- ~~morris~~ traversals
+
+### graphs
+- BFS/DFS on grids as well
+- cycle detection
+- no of connected islands
+- topological sorting
+- Shortest path algo (djikstra )
+- MST : prime
+
+### DP
+ - 0/1 knapsack
+ - DP on subseq
+ - DP on stocks
+ - Dp on subsets
+ - DP on grids
+### tries
+- dictionary
+- dial pad
+- creation , insertion
+
+### linkedlist
+- creation , deletion, insertion
+- reverse linkedlist
+- cycle linkedlist
+- intersection of two linkedlist
+
+### BST
+- Insertion, deletion 
+- insert or delete kth node
+- LCA in BST
+
+### Strings
+- longest increasing/decreasing 
+- palindromes
+- anagrams
+- roman to integer
+- integer to roman
+- patter matching
+
+### heap(using priority queue)
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # leetcode 
 
 ## 2001. Number of Pairs of Interchangeable Rectangles

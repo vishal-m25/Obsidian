@@ -28,5 +28,5 @@ hypr-lock, sway-lock --> for lock screen
 powertop  --> power saver
 
 
-## sdu -->  storage utilization finder
+## gdu -->  storage utilization finder
 

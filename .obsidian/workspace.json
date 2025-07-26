@@ -27,16 +27,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "recall.md",
+                "file": "Company exp.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "recall"
+              "title": "Company exp"
             }
           },
           {
-            "id": "3da8ef658df28424",
+            "id": "9073e416c781c254",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Spring.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Spring"
+            }
+          },
+          {
+            "id": "7d9aa6f3886068f5",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -47,6 +61,20 @@
               },
               "icon": "lucide-file",
               "title": "recall"
+            }
+          },
+          {
+            "id": "54ea736020b992b5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "paper.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "paper"
             }
           },
           {
@@ -64,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -96,7 +124,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "event loop",
+                "query": "express",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -191,14 +219,23 @@
               "icon": "lucide-list",
               "title": "Outline of Aptitude formulas"
             }
+          },
+          {
+            "id": "b99e79cc2d3a9731",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -208,25 +245,28 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3da8ef658df28424",
+  "active": "81bec6e31916f035",
   "lastOpenFiles": [
     "Full stack.md",
-    "OOPs.md",
-    "recall.md",
-    "Spring.md",
-    "Pasted image 20250429094750.png",
+    "paper.md",
+    "java.md",
     "Project Notes.md",
-    "Pasted image 20250429094246.png",
+    "Spring.md",
     "Topics to know.md",
-    "AMCAT.md",
-    "Aptitude formulas.md",
+    "recall.md",
     "Company exp.md",
+    "AMCAT.md",
     "DSA.md",
-    "Pasted image 20250429094514.png",
     "Configurations.md",
+    "Angular.md",
+    "Aptitude formulas.md",
+    "Pasted image 20250429094750.png",
+    "Pasted image 20250429094246.png",
+    "Pasted image 20250429094514.png",
     "OOPs",
     "Untitled",
     "cars.md",

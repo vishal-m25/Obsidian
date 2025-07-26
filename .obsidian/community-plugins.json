@@ -1,5 +1,8 @@
 [
   "obsidian-latex-suite",
   "quick-latex",
-  "obsidian-html-tags-autocomplete"
+  "obsidian-html-tags-autocomplete",
+  "markdown-prettifier",
+  "obsidian-plugin-prettier",
+  "obsidian-git"
 ]
