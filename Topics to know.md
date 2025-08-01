@@ -33,3 +33,23 @@
 
 ## API
 - a set of rules and specifications that allow different software systems to communicate
+
+
+### java vs c++
+| **Parameters**        | **Java**                                                                                            | **C++**                                                                                    |
+| --------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Platform Dependency   | Platform-independent, Java bytecode works on any operating system.                                  | Platform dependent should be compiled for different platforms.                             |
+| Compilation           | Java is both a Compiled and Interpreted Language.                                                   | C++ is a Compiled Language.                                                                |
+| Memory Management     | Memory Management is System Controlled.                                                             | Memory Management in C++ is Manual.                                                        |
+| Virtual Keyword       | It doesn't have Virtual keywords.                                                                   | It has Virtual keywords.                                                                   |
+| Multiple Inheritance  | It supports only single inheritance. Multiple inheritances are achieved partially using interfaces. | It supports both single and multiple Inheritance                                           |
+| Overloading           | It supports only method overloading and doesn't allow operator overloading.                         | It supports both method and operator overloading.                                          |
+| Pointers              | It has limited support for pointers.                                                                | It strongly supports pointers                                                              |
+| Documentation Comment | It supports documentation comments (e.g., /**.. */) for source code.                                | It doesn’t support documentation comments for source code.                                 |
+| Thread Support        | Java provides built-in support for multithreading.                                                  | C++ doesn’t have built-in support for threads, depends on third-party threading libraries. |
+| Type                  | Java is only an object-oriented programming language                                                | C++ is both a procedural and an object-oriented programming language.                      |
+| goto Keyword          | Java doesn't support the goto Keyword                                                               | C++ supports the goto keyword                                                              |
+| Parameter Passing     | Java supports only the Pass by Value technique.                                                     | C++ supports both Pass by Value and pass-by-reference.                                     |
+| Global Scope          | It supports no global scope.                                                                        | It supports both global scope and namespace scope.                                         |
+| Object Management     | Automatic object management with garbage collection.                                                | It supports manual object management using new and deletes.                                |
+| Hardware              | Java is not so interactive with hardware.                                                           | C++ is nearer to hardware.                                                                 |
