@@ -6,6 +6,8 @@
  - Node.js is a run time environment that used browser engine to run the server in V8 JavaScript engine , the core of chrome browser outside the browser to provide high performance
  - Express is a node js framework
 
+- arrow function will not be declared in the time of hoisting, but while the execution begins it is declared.
+- **fragments** in react is used to group html elements with the use of `<div></div>`  instead 
 
 ## Requests
 - ### options 
