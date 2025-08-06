@@ -13,6 +13,18 @@
 	The variables are declared as private
 
 
+- Anonymous class or object or anything does utilize memory
+
+### Anonymous class
+```java
+class A{
+
+}
+
+new A()
+```
+
+
 
 ### Sealed class
 - it is used when the class needs only to be extended by certain specific classes
@@ -66,3 +78,15 @@ public class EnumExample {
 ```
 
 
+### Tightly Coupling
+- when change in one class does force the other class to change in implementation then it is said to be tightly coupled.
+- has less number of classes compared to loose coupling but 
+
+### Loosely coupled
+- when change in one class does not affect the structure of another which is using it then it is loosely coupled.
+- implementation relies heavily on interface and abstract classes.
+- does include more classes but end up being more flexible than tight due to its representation restrictions.
+
+### Overriding 
+- it is a case of function having the same signature of an existing function to bypass the existing function.
+- in case of overriding if the functions does not have the same return type it rises an error
