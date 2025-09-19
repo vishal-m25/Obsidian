@@ -2,10 +2,13 @@
 ### Advantages of java 8
 -  Introduced lambda fucntion
 - Introduced default and static methods in interfaces
+- Backward compatibility is mostly intact
+- most of the product or service were freely available
 
 
 ### JDK 
-- It provides necessary tools and environment to develop java applications
+- It provides necessary tools and environment to develop java applications,
+- includes JRE, and JVM
 
 ### JRE (java runtime environment)
 - consists of JVM and compiler along with necessary standard libraries to aid in converting java file to class file.
@@ -17,10 +20,10 @@
 - also known as interpreter
 - uses JIT (just in time: converted from byte-code to machine code wile runtime) for faster execution
 - works:
-	- loading
-	- linking 
-	- initialization
-	- garbage collection
+	- **loading
+	- **linking 
+	- **initialization
+	- **garbage collection
 	- memory allocation and deallocation
 		- types
 			- stack 
@@ -41,12 +44,15 @@
 
 ### Execution
 - stages
-	- ClassLoader
-		- primordial -- default class loader
-		- non-primordial -- user defined class loader (preferred)
-	- Bytecode verifier
+	- **ClassLoader
+		- primordial -- default class loader (the  first special class loader that loads the bootloader class, written in machine code)
+			- the very first class the JVM loads to start the class loading process. 
+		- non-primordial -- all the class loader other than the bootloader class.
+		- user-defined cassloader
+		
+	- **Bytecode verifier
 		- checks if the code does any damaging actions
-	- JIT compiler
+	- **JIT compiler
 
 ```
 - The size of heap varies during the runtime 
@@ -134,6 +140,109 @@
 
 ### Statement
 - These are similar to sentence in natural language. A statement forms  a complete form of execution. Some expressions with semicolon in the end represents a statement.
+
+### Autoboxing 
+- Conversion of primitive data type into its wrapper class
+```java
+// Autoboxing
+Integer obj = 10;
+// Explicit casting
+Integer obj2 = Integer.valueOf(10)
+```
+### Unboxing
+- used by compiler to convert the wrapper class into its primitive datatype
+```java
+Integer obj = Integer.valueOf(10);
+// Unboxing
+int i = obj;
+// Explicit value deduction
+i = obj.intValue();
+```
+
+### Break statement
+- Types
+	- Labelled
+		- points to a label, where the loop below the label is terminated
+		- helps in specifically break a certain inner loop in several nested loops 
+```java
+        int i;
+        int j = 0;
+        boolean foundIt = false;
+
+    search:
+        for (i = 0; i < arrayOfInts.length; i++) {
+            for (j = 0; j < arrayOfInts[i].length;
+                 j++) {
+                if (arrayOfInts[i][j] == searchfor) {
+                    foundIt = true;
+                    break search; // breaks the outer loop as well
+                }
+            }
+        }
+```
+	- unlabelled
+		-  a plain `break` keyword that break the loop in which it is present(the immediate loop from its scope)
+
+
+### Continue statement
+- Types
+	- Labelled
+		- points to a label, where the current iteration of the labelled loop is skipped
+		- helps in specifically skip an iteration of a certain inner loop in several nested loops 
+```java
+          test:
+        for (int i = 0; i <= max; i++) {
+            int n = substring.length();
+            int j = i;
+            int k = 0;
+            while (n-- != 0) {
+                if (searchMe.charAt(j++) != substring.charAt(k++)) {
+                    continue test;
+                }
+            }
+            foundIt = true;
+                break test;
+        }
+```
+	- unlabelled
+		-  a plain `continue` keyword that skips the current iteration the loop in which it is present(the immediate loop from its scope)
+
+### Components of method declaration
+- **Modifier
+- **Return Type
+- **Method Name
+- **Parameters
+- **Exception list
+- **Method Body
+
+### Method Signature ---- Method name and Parameters
+
+- #### Note -- two methods with same signature and different return types cannot exist, because compiler does not consider return type while differentiating the methods
+
+**Note** --- All classes have at least one constructor. If a class does not explicitly declare any, the Java compiler automatically provides a no-argument constructor, called the _default constructor_. This default constructor calls the class parent's no-argument constructor, or the `Object` constructor if the class has no other parent. If the parent has no constructor (`Object` does have one), the compiler will reject the program. ( This  occurs when a parent class has a parameterized constructor and the child class does not have a constructor. then on trying to create an object in child class will be an error)
+
+**Note** --- Initialization of parent class should be only in the first of the constructor.
+
+**Covariant return type** --- If a function has a class as its return type, then it can return on object referring to the class itself or to its subclass.
+
+### Garbage Collector
+-  An object is eligible for garage collection only if there is no more references to it in the future.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
