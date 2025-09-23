@@ -95,7 +95,7 @@
 | Includes            | JRE + Development tools (javac, debugger, etc.) | JVM + Libraries (e.g., rt.jar)         | ClassLoader, JIT Compiler, Garbage Collector             |
 | Use Case            | Writing and compiling Java code                 | Running a Java application on a system | Convert bytecode into native machine code                |
 
-### Naming Convention
+## Naming Convention
 
 | Identifier Type                                     | Rules for Naming                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Examples                                                                                                          |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
@@ -114,18 +114,23 @@
 
 
 
-### keywords
-|Category|Keywords|
-|---|---|
-|Data Types|byte, short, int, long, float, double, boolean, char|
-|Access Modifiers|public, private, protected|
-|Control Flow|if, else, switch, case, default, while, do, for, break, continue, return|
-|Error Handling|try, catch, finally, throw, throws|
-|Object-Oriented|class, interface, extends, implements, this, super|
-|Memory/Threads|new, static, final, abstract, synchronized, volatile, transient, native, strictfp|
-|Other Useful|instanceof, import, package, assert, enum, void|
+## keywords
+| Category         | Keywords                                                                          |
+| ---------------- | --------------------------------------------------------------------------------- |
+| Data Types       | byte, short, int, long, float, double, boolean, char                              |
+| Access Modifiers | public, private, protected                                                        |
+| Control Flow     | if, else, switch, case, default, while, do, for, break, continue, return          |
+| Error Handling   | try, catch, finally, throw, throws                                                |
+| Object-Oriented  | class, interface, extends, implements, this, super                                |
+| Memory/Threads   | new, static, final, abstract, synchronized, volatile, transient, native, strictfp |
+| Other Useful     | instanceof, import, package, assert, enum, void                                   |
 
-### Access modifiers 
+- ### Default
+	- this keyword can only be used in two places
+		- switch case
+		- [[#Interface]]
+
+## Access modifiers 
 
 | Context                        | Default | Private | Protected | Public |
 | ------------------------------ | ------- | ------- | --------- | ------ |
@@ -140,7 +145,7 @@
 	- can directly accessed with the class name, doesn't require an object
 
 
-### Java Structure
+## Java Structure
 - Package declaration
 - import statements
 - class definition
@@ -181,6 +186,38 @@
 | assignment           | `= += -= *= /= %= &= ^= \|= <<= >>= >>>=` | left to right<br> |
 ### Instanceof
 - used to compare an object on a specified type. or test if an object is an instance of a class, an instance of a subclass, or an instance of a class that implements a particular interface.
+
+### Enum 
+- A special data type that enables a variable to be set of a predefined constants
+- It can have methods, constructors for complex use case
+- it provides type safety
+```java 
+public enum Day {
+    SUNDAY,
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY; // Semicolon is required if you have methods/fields
+}
+
+public class EnumExample {
+    public static void main(String[] args) {
+        Day today = Day.MONDAY;
+        System.out.println("Today is: " + today); // Output: Today is: MONDAY
+
+        if (today == Day.SUNDAY) {
+            System.out.println("It's the weekend!");
+        } else {
+            System.out.println("It's a weekday."); // Output: It's a weekday.
+        }
+    }
+}
+```
+
+
+
 
 ### Compile-Time Constant 
 - When the compiler knows the constant value of the primitive type variables during compilation. It replaces all the variables with the value during the compile time itself
@@ -269,25 +306,17 @@ i = obj.intValue();
 
 - #### Note -- two methods with same signature and different return types cannot exist, because compiler does not consider return type while differentiating the methods
 
-**Note** --- All classes have at least one constructor. If a class does not explicitly declare any, the Java compiler automatically provides a no-argument constructor, called the _default constructor_. This default constructor calls the class parent's no-argument constructor, or the `Object` constructor if the class has no other parent. If the parent has no constructor (`Object` does have one), the compiler will reject the program. ( This  occurs when a parent class has a parameterized constructor and the child class does not have a constructor. then on trying to create an object in child class will be an error)
+**Note** --- All classes have at least one constructor. If a class does not explicitly declare any, the Java compiler automatically provides a no-argument constructor, called the **_default constructor_**. This default constructor calls the class parent's no-argument constructor, or the `Object` constructor if the class has no other parent. If the parent has no constructor (`Object` class does have one), the compiler will reject the program. ( This  occurs when a parent class has a parameterized constructor and the child class does not have a constructor. then on trying to create an object in child class will be an error)
 
-**Note** --- Initialization of parent class should be only in the first of the constructor.
+**Note** --- Initialization of parent class should be only in the first of the constructor. (i.e: `super()` )
 
 **Covariant return type** --- If a function has a class as its return type, then it can return on object referring to the class itself or to its subclass.
 
 ### Garbage Collector
 -  An object is eligible for garage collection only if there is no more references to it in the future.
 
-### Tightly Coupling
-- when change in one class does force the other class to change in implementation then it is said to be tightly coupled.
-- has less number of classes compared to loose coupling but 
 
-### Loosely coupled
-- when change in one class does not affect the structure of another which is using it then it is loosely coupled.
-- implementation relies heavily on interface and abstract classes.
-- does include more classes but end up being more flexible than tight due to its representation restrictions.
-
-
+## Class
 
 ### Constructor
 - final keyword cannot be given to a constructor
@@ -329,15 +358,43 @@ i = obj.intValue();
 ```
 
 
-### Initializer Block
-- it is a block of initializing code that is shared among all the constructors
 ### Final Method
 - It is used when the sub-classes wanted to use the same initialization code as the parent then can be inherited and used, since the static method does not override on inheritance.
 
 ### Static method restrictions
 - Can only access fields or methods that are static
-- Cannot to override them
+- Cannot override them
 - cannot have **this** or **super** keyword in them
+
+### Override restrictions
+- You cannot override a **static/final/private** method.
+- __protected__ method can only be overriden as __protected__
+
+
+
+### Tightly Coupled
+- when change in one class does force the other class to change in implementation then it is said to be tightly coupled.
+- has less number of classes compared to loose coupling 
+
+### Loosely coupled
+- when change in one class does not affect the structure of another which is using it then it is loosely coupled.
+- implementation relies heavily on interface and abstract classes.
+- does include more classes but end up being more flexible than tight due to its representation restrictions.
+
+### Interface 
+- it is a blueprint for a class, serving as a contract that defines a set of abstract methods and constant fields. It specifies what a class should do, but not how it should do it.
+- Interface can be inherited
+- Provide complete abstraction
+- **`default`** keyword is allowed in here
+	- in need of adding new member or function and that is not needed to be a part of all the implemented class then default keyword is used
+
+### Abstract class
+- Provides partial abstraction
+- can have both concrete or abstract methods
+- cannot have instance
+- can be public, final, default
+
+
  
 ## Nested classes
 - **Why 
@@ -357,12 +414,12 @@ i = obj.intValue();
 			- declared without a name, used for a short time 
 
 ### Shadowing
-- If a declaration in the enclosing class is the same in the nested class then the field is shadowed
-- The enclosing class variable should be accessed with `ClassName.this.x`
+- If a declaration in the enclosing class is the same in the nested class then the field of the enclosing class is shadowed
+- The enclosing class variable should be accessed with **`ClassName.this.x`**
 
 
 ### Serialization 
-- **it is converting of objects into byte so that it can be 
+- **it is converting of objects into byte stream so that it can be 
 	- saved in a file
 	- transferred through a network
 - It is done with the help of **Serializable** interface
@@ -401,6 +458,10 @@ public class SerializeExample {
 ### Anonymous class
 -  You can also declare an inner class within the body of a method without naming the class. 
 - instance and member access is same as local class
+- Can be created with
+	- Interface
+	- extend an abstract or concrete class
+	
 ```java
 // Java Program to Demonstrate Anonymous inner class
 
@@ -444,46 +505,56 @@ public sealed class parent permits child, grandchile{
 }
 ```
 
-### Exception 
+## Exception 
 - It is an exceptional event that occurs during the execution of the program that disrupts the flow of instructions.
 - when an exceptional event occurs, the method creates an object called __exception__ and sends it to the runtime system.
 - when an exception occurs, runtime searches the call stack(method invocations) sequentially to check for an matching exception handler, if matches, handles it and continues the program from that point, else the program is terminated.
 
-
-
-
-
-
-
-
-
-### Enum 
-- A special data type that enables a variable to be set of a predefined constants
-- It can have methods, constructors for complex use case
-- it provides type safety
+- **Checked exception
+	- Compile time errors
+- **Unchecked exception
+	- Errors
+	- Run-time Exceptions
+### Suppressed exceptions
+- When a try block throws an exception and while closing the resources, the try-wth-resource as well throws an exception then the try-with-resource exception is suppressed within the primary and delivered.
+- it can be accessed by
 ```java 
-public enum Day {
-    SUNDAY,
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY; // Semicolon is required if you have methods/fields
-}
-
-public class EnumExample {
-    public static void main(String[] args) {
-        Day today = Day.MONDAY;
-        System.out.println("Today is: " + today); // Output: Today is: MONDAY
-
-        if (today == Day.SUNDAY) {
-            System.out.println("It's the weekend!");
-        } else {
-            System.out.println("It's a weekday."); // Output: It's a weekday.
+} catch (Exception e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+            for (Throwable t : e.getSuppressed()) {
+                System.out.println("Suppressed: " + t);
+            }
         }
-    }
-}
 ```
+
+### Try-with-resource
+- Apart from having the try-catch-finally functionality, it has resources created within parenthesis after `try` keyword
+- Such resources should implement **AutoCloseable/Closeable**. interfacee 
+- This the resources are automatically closed at the end of try block.
+
+### Chained Exception
+- when an exception is caught, it throws another exception to a higher exception handles containing the main exception .
+- it helps in associating one exception with other exception, through proper description.
+
+
+**Stack trace:** A _stack trace_ provides information on the execution history of the current thread and lists the names of the classes and methods that were called at the point when the exception occurred. A stack trace is a useful debugging tool that you'll normally take advantage of when an exception has been thrown.
+
+### Creating Exception classes
+- **Note** -- If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
+
+### Advantages of exception
+- **Separates error/exception prone code from regular code
+- **propagates error up the call stack
+- **Grouping error types
+
+### Overriding a method that throws an exception
+- when parent doesn't throw an exception then the child cannot throw a checked exception but can be unchecked
+- the child should not throw an exception that is superset of the parent class exception
+- The first throws fewer exceptions than the overridden method, and the second, even though it throws more; they’re narrower in scope.
+- parent and child can throw irrelevant exceptions
+
+### Note
+- if a methods declared to throw a checked exception is called it should be handled inside a try-catch block or the function itself can be declared of throwing the same exception to avoid compile time interruption.
+
 
 
