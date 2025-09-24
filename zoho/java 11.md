@@ -52,6 +52,7 @@
  4. data flow analysis is done for code reachability and variable assignments.
  5. converts sugared(complex representation) code to simpler fundamental constructs.
  6. generate `.class` file
+ 7. Keywords are differentiated from others with the help of lexical analyzer, reserved word list and token recognition 
 
 ### symbol table
 - helps find scope of variable, type checking, verify proper calling of functions.
@@ -68,6 +69,7 @@
 		
 	- **Bytecode verifier
 		- checks if the code does any damaging actions
+		- check for security and integrity are maintained or not
 	- **JIT compiler
 
 ```
@@ -94,6 +96,7 @@
 | Platform Dependency | Platform-dependent (OS specific)                | Platform-dependent (OS specific)       | JVM is OS-specific, but bytecode is platform-independent |
 | Includes            | JRE + Development tools (javac, debugger, etc.) | JVM + Libraries (e.g., rt.jar)         | ClassLoader, JIT Compiler, Garbage Collector             |
 | Use Case            | Writing and compiling Java code                 | Running a Java application on a system | Convert bytecode into native machine code                |
+|                     |                                                 |                                        |                                                          |
 
 ## Naming Convention
 
@@ -125,7 +128,7 @@
 | Memory/Threads   | new, static, final, abstract, synchronized, volatile, transient, native, strictfp |
 | Other Useful     | instanceof, import, package, assert, enum, void                                   |
 
-- ### Default
+- ### Default keyword
 	- this keyword can only be used in two places
 		- switch case
 		- [[#Interface]]
@@ -189,6 +192,8 @@
 
 ### Enum 
 - A special data type that enables a variable to be set of a predefined constants
+- it is final by design
+- can implement interfaces
 - It can have methods, constructors for complex use case
 - it provides type safety
 ```java 
@@ -318,6 +323,10 @@ i = obj.intValue();
 
 ## Class
 
+### Initialization order
+- **static variables → static blocks → instance variables → instance blocks → constructor**.
+- A **`final`** variable declared but **not initialized** (blank final) can only be initialized inside a **constructor or initializer block**.
+
 ### Constructor
 - final keyword cannot be given to a constructor
 - types 
@@ -346,6 +355,7 @@ i = obj.intValue();
 
 - **Static Initialization Block
 	- Executes only once in the entire 
+	- executes just after the class is loaded
 ```java
         class MyClass {
             static int staticVar;
@@ -558,3 +568,166 @@ public sealed class parent permits child, grandchile{
 
 
 
+## Collections
+- It inherits Iterator class 
+
+| Key                  | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| what                 | it is an object that represent a group of objects                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| purpose              | used to store, retrieve, manipulate, and communicate aggregate data effieiency                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Collection interface | `java.util.Collection`                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Sub-interfaces       | - list (ArrayList, LinkedList)<br>- set (HashSet,TreeSet)<br>- queue (PriorityQueue)<br>- deque (ArrayDeque)                                                                                                                                                                                                                                                                                                                                                                                    |
+| Advantages           | - Ready-made data structures<br>- Increased performance due to common interface<br>- Provides a common language for passing collection between different APIs.                                                                                                                                                                                                                                                                                                                                  |
+| Methods              | The `Collection` interface contains methods that perform basic operations, such as **`int size()`**, **`boolean isEmpty()`**, **`boolean contains(Object element)`**, **`boolean add(E element)`**, <br>**`boolean remove(Object element)`**, and **`Iterator<E> iterator()`**.<br><br>**`boolean containsAll(Collection<?> c)`**, **`boolean addAll(Collection<? extends E> c)`**, **`boolean removeAll(Collection<?> c)`**, **`boolean retainAll(Collection<?> c)`**, and **`void clear()`**. |
+
+### Collection Framework
+- Unified architecture for representing and manipulating collections
+- contains
+	- Interface
+	- implementations
+	- algorithm
+### Collection interface
+- It is used to pass around group of objects where maximum generality is desired.
+
+### For iterations of collections 
+- Aggregate functions
+```java 
+import java.util.ArrayList;
+
+class Sample{
+    public static void main(String[] args) {
+        ArrayList<Integer> arl=new ArrayList<>();
+        arl.add(1);
+        arl.add(2);
+        arl.stream().filter(e-> e>1).forEach(i -> System.out.println(i)); //aggregate function
+        System.out.println(arl.stream().count());
+    }
+}
+```
+- for-each loop
+```java
+for (Object o : collection)
+    System.out.println(o);
+
+```
+- `Iterators` 
+```java
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+class Sample{
+    public static void main(String[] args) {
+        ArrayList<Integer> arl=new ArrayList<>();
+        arl.add(1);
+        arl.add(2);
+        Iterator<Integer> iter=arl.iterator();
+        while(iter.hasNext()){
+            System.out.println(iter.next());
+            
+        }
+    }
+}
+```
+
+### Set interface
+- This collection does not contain duplicate elements
+- general implementation
+	- HashSet
+	- TreeSet
+	- LinkedHashSet
+#### TreeSet
+- Stores elements in red-black tree
+- ordered based on their value
+- slower than the rest two
+#### LinkedHashSet
+- maintains the insertion order
+- uses hash function for storing and accessing
+
+#### HashSet
+- Does not maintain any order of the elements
+- use hash table to store and access elements
+#### Operations
+- basic
+	- size()
+	- isEmpty()
+	- Iterator
+- bulk
+	- containsAll()
+	- retainAll()
+	- addAll()
+	- removeAll()
+```java 
+Set<Type> union = new HashSet<Type>(s1);
+union.addAll(s2);
+
+Set<Type> intersection = new HashSet<Type>(s1);
+intersection.retainAll(s2);
+
+Set<Type> difference = new HashSet<Type>(s1);
+difference.removeAll(s2);
+```
+
+### List interface
+- Ordered collection / sequence
+- **Operations
+	- get()
+	- set()
+	- add()
+	- addAll()
+	- remove()
+	- indexOf()
+	- lastIndexOf()
+	- listIterator()
+	- sublist()
+- **Algorithms
+	- sort()
+	- shuffle()
+	- reverse()
+	- rotate()
+	- swap()
+	- replaceAll()
+	- fill()
+	- copy()
+	- binarySearch()
+	- indexOfSublist()
+	- lastIndexOfSublist()
+
+### Queue interface
+
+| Type of Operation | Throws exception                     | Returns special value |
+| ----------------- | ------------------------------------ | --------------------- |
+| Insert            | `add(e)` on exceeding queue size     | `offer(e)`            |
+| Remove            | `remove()` when no element to remove | `poll()`              |
+| Examine           | `element()` when queue is empty      | `peek()`              |
+- Queue itself does not allow null values ,  **but** queue implemented with LinkedList allows.
+
+### Dequeue interface
+- It is a **double-ended queue** 
+- It supports insertion and deletion of elements on both the ends
+- It implements both stack and queue at the same time
+
+| Type of Operation | First Element (Beginning of the `Deque` instance) | Last Element (End of the `Deque` instance) |
+| ----------------- | ------------------------------------------------- | ------------------------------------------ |
+| **Insert**        | `addFirst(e)`  <br>`offerFirst(e)`                | `addLast(e)`  <br>`offerLast(e)`           |
+| **Remove**        | `removeFirst()`  <br>`pollFirst()`                | `removeLast()`  <br>`pollLast()`           |
+| **Examine**       | `getFirst()`  <br>`peekFirst()`                   | `getLast()`  <br>`peekLast()`              |
+
+### Map interface
+- it is an object that maps keys to values
+- Cannot contain duplicate keys
+- one key can utmost point to one value
+- Operations
+	- get()
+	- put()
+	- remove()
+	- containsKey()
+	- containsValue()
+	- size()
+	- empty()
+	- putAll()
+	- clear()
+- Views
+	- keySet
+	- entrySet
+	- values
