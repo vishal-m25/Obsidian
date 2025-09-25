@@ -5,6 +5,16 @@
 - Backward compatibility is mostly intact
 - most of the product or service were freely available
 
+| Aspect              | Before Java 11 (≤ Java 10)                          | After Java 11                                                    |
+| ------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
+| **Adoption**        | Java 8 dominant (stable, LTS)                       | Enterprises slowly moved to Java 11                              |
+| **Release Cadence** | Old “every few years” releases                      | 6-month release cycle (LTS every 3 years)                        |
+| **Features**        | Streams, Lambdas, Modules (Java 9), `var` (Java 10) | HTTP/2 client, new APIs, `var` for lambdas, ZGC                  |
+| **Ecosystem**       | Java EE, CORBA, JavaFX still included               | Removed legacy tech, leaner JDK                                  |
+| **Licensing**       | Oracle JDK free                                     | Oracle JDK requires subscription; OpenJDK & vendors fill the gap |
+| **Stability**       | Java 8 considered rock-solid                        | Java 11 became next enterprise LTS target                        |
+| **Migration**       | Smooth from 7 → 8, rough 8 → 9                      | 8 → 11 migration required significant refactoring                |
+
 ### Features of java
 - **Platform Independent**
 - **Object-Oriented**
@@ -62,12 +72,12 @@
 - The first file to be executed is **java.exe** which is the JVM launcher.
 - stages
 	- **ClassLoader
-		- primordial -- default class loader (the  first special class loader that loads the bootloader class, written in machine code)
-			- the very first class the JVM loads to start the class loading process. 
-		- non-primordial -- all the class loader other than the bootloader class.
-		- user-defined cassloader
+		- primordial/bootstrap classloader -- default class loader (the  first special class loader that loads the bootloader class, written in machine code)
+			- Loads the necessary classes required for JRE and JVM to function 
+		- non-primordial/extension classloader -- all the class loader other than the bootloader class. like libraries
+		- user-defined classloader
 		
-	- **Bytecode verifier
+	- **Bytecode verifier 6
 		- checks if the code does any damaging actions
 		- check for security and integrity are maintained or not
 	- **JIT compiler
@@ -127,6 +137,7 @@
 | Object-Oriented  | class, interface, extends, implements, this, super                                |
 | Memory/Threads   | new, static, final, abstract, synchronized, volatile, transient, native, strictfp |
 | Other Useful     | instanceof, import, package, assert, enum, void                                   |
+|                  |                                                                                   |
 
 - ### Default keyword
 	- this keyword can only be used in two places
@@ -169,6 +180,20 @@
 | long    | 64-bit signed integer          | 0L      | 8 bytes                          | -2L,0L,1L                                   | -9,223,372,036,854,775,808<br>to<br>9,223,372,036,854,775,807 |
 | float   | 32-bit IEEE 754 floating-point | 0.0f    | 4 bytes                          | 3.14f, -1.23e-10f                           | ~6-7 significant decimal digits                               |
 | double  | 64-bit IEEE 754 floating-point | 0.0d    | 8 bytes                          | 3.1415d, 1.23e100d                          | ~15-16 significant decimal digits                             |
+
+### Primitive types
+- these are reserved keywords defined by **Java Language Specification(JLS)**
+- These are supported directly by JVM
+- ON initialization the value are directly stored not stored as reference
+- Supports autoboxing and unboxing
+
+### Wrapper classes
+- Create to wrap the primitive types in java
+- since all the application in java deal with objects, so to adapt the primitive to objects wrapper class is introduced
+- it is **Immutable**
+- Provides many utility functions to wonk on the primitive type and their values
+
+
 
 ### Operators
 | Operators            | Precedence                                | execute from      |
@@ -378,7 +403,7 @@ i = obj.intValue();
 
 ### Override restrictions
 - You cannot override a **static/final/private** method.
-- __protected__ method can only be overriden as __protected__
+- __protected__ method can only be overridden as __protected__
 
 
 
@@ -397,6 +422,14 @@ i = obj.intValue();
 - Provide complete abstraction
 - **`default`** keyword is allowed in here
 	- in need of adding new member or function and that is not needed to be a part of all the implemented class then default keyword is used
+
+### Functional interface
+- Has only one abstract method irrespective of the other methods
+- **Consumer** -- when dealing with single argument
+- **Predicate** -- when dealing with boolean value
+- **Supplier** -- Does not take argument but returns value
+- **Function** --when dealing with single argument and in need of return functionality
+
 
 ### Abstract class
 - Provides partial abstraction
@@ -505,6 +538,36 @@ class AnonymousDemo {
 }
 ```
 
+- Types
+	- By implementing interface
+	- By extending a class
+	- Passed as argument inside a method
+```java
+abstract class Shape {
+    abstract void draw();
+}
+
+public class Main {
+    static void printShape(Shape s) {
+        s.draw();   // ✅ Here we call the overridden method
+    }
+
+    public static void main(String[] args) {
+        printShape(new Shape() {
+            @Override
+            void draw() {
+                System.out.println("Drawing a Circle");
+            }
+        });
+    }
+}
+
+```
+
+
+
+
+
 
 ### Sealed class
 - it is used when the class needs only to be extended by certain specific classes
@@ -520,9 +583,9 @@ public sealed class parent permits child, grandchile{
 - when an exceptional event occurs, the method creates an object called __exception__ and sends it to the runtime system.
 - when an exception occurs, runtime searches the call stack(method invocations) sequentially to check for an matching exception handler, if matches, handles it and continues the program from that point, else the program is terminated.
 
-- **Checked exception
+- **Checked exception** 
 	- Compile time errors
-- **Unchecked exception
+- **Unchecked exception** 
 	- Errors
 	- Run-time Exceptions
 ### Suppressed exceptions
@@ -539,7 +602,7 @@ public sealed class parent permits child, grandchile{
 
 ### Try-with-resource
 - Apart from having the try-catch-finally functionality, it has resources created within parenthesis after `try` keyword
-- Such resources should implement **AutoCloseable/Closeable**. interfacee 
+- Such resources should implement **AutoCloseable/Closeable**. interface
 - This the resources are automatically closed at the end of try block.
 
 ### Chained Exception
@@ -569,7 +632,7 @@ public sealed class parent permits child, grandchile{
 
 
 ## Collections
-- It inherits Iterator class 
+- It inherits Iterable class 
 
 | Key                  | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -582,10 +645,20 @@ public sealed class parent permits child, grandchile{
 
 ### Collection Framework
 - Unified architecture for representing and manipulating collections
+- **final** keyword on list object will only stop it from reassigning not from appending
 - contains
 	- Interface
 	- implementations
 	- algorithm
+
+
+| Interface | Allows Duplicates | Ordered                   | Sorted                  | Nulls Allowed                            |
+| --------- | ----------------- | ------------------------- | ----------------------- | ---------------------------------------- |
+| List      | Yes               | Yes                       | No                      | Yes (one null in some cases)             |
+| Set       | No                | No (except LinkedHashSet) | Yes (TreeSet)           | Only one null (HashSet)                  |
+| Queue     | Yes               | Yes                       | Priority-based possible | One null (except PriorityQueue)          |
+| sMap      | No (for keys)     | Depends                   | TreeMap sorted by keys  | One null key (HashMap), many null values |
+
 ### Collection interface
 - It is used to pass around group of objects where maximum generality is desired.
 
@@ -629,6 +702,26 @@ class Sample{
     }
 }
 ```
+### Fail fast and fail safe iterators
+|Aspect|Fail-Fast Iterator|Fail-Safe Iterator|
+|---|---|---|
+|Behavior on concurrent modification|Throws `ConcurrentModificationException` immediately|Does not throw exception; iterates on a snapshot|
+|Method of iteration|Iterates on the actual collection|Iterates on a clone/copy of the collection|
+|Overhead|Low overhead (no copying)|Higher overhead due to copying|
+|Use case|Single-threaded or controlled modification environments|Multi-threaded environments supporting concurrent modifications|
+|Exception thrown|Yes|No|
+- **Fail-safe iterator** , can also apply to a copy of the collection created in other ways
+```java 
+CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<>(Arrays.asList(1, 2, 3));
+Iterator<Integer> iterator = list.iterator();
+while (iterator.hasNext()) {
+    Integer num = iterator.next();
+    list.add(4);  // Safe to modify during iteration
+}
+
+```
+
+
 
 ### Set interface
 - This collection does not contain duplicate elements
@@ -731,3 +824,363 @@ difference.removeAll(s2);
 	- keySet
 	- entrySet
 	- values
+
+
+### TreeSet vs HashSet
+
+| Feature           | HashSet (unordered) | TreeSet (sorted)                               |
+| ----------------- | ------------------- | ---------------------------------------------- |
+| Data structure    | HashMap             | TreeMap (Red-Black Tree) ordered BST           |
+| Ordering          | None                | Natural / Comparator                           |
+| Nulls allowed     | One null            | No nulls                                       |
+| Time complexity   | O(1) average        | O(log n)                                       |
+| Duplicate allowed | No                  | No                                             |
+| Iteration order   | Random              | Sorted                                         |
+| Extra methods     | Basic (add, remove) | Navigation methods (first, last, subset, etc.) |
+
+### HashMap
+- Collitions
+	- handled by putting the same hashcode keys in a bucket and use **`equals`** to differentiate them
+- Load factor
+	- states how full the hashmap can be before its size is increased.
+- Not thread-safe
+	- is not synchronized and can lead to racing conditions 
+- Hashtable is thread-safe
+	- use synchronized methods, but has performance overhead
+
+### LinkedHashMap
+- Has features of both hash table and doubly-linkedlist
+
+
+TreeMap/TreeSet does not allow null value because it maintains certain ordering with the help of comparisons 
+
+
+**Note** -- you are allowed to create your own immutable collection
+- can either be done by
+	- implementing existing interface
+	- or overriding the available function to create from scratch
+- it helps in having 
+	- read only collection
+	- thread safe collection
+
+
+
+
+
+### Cursor
+- it is an object used to traverse 
+### Iterator for collection 
+- it is an **interface
+
+
+
+
+
+
+
+
+
+## I/O 
+
+
+### [I/O Streams](https://docs.oracle.com/javase/tutorial/essential/io/streams.html)
+
+- [Byte Streams](https://docs.oracle.com/javase/tutorial/essential/io/bytestreams.html) handle I/O of raw binary data.
+- [Character Streams](https://docs.oracle.com/javase/tutorial/essential/io/charstreams.html) handle I/O of character data, automatically handling translation to and from the local character set.
+- [Buffered Streams](https://docs.oracle.com/javase/tutorial/essential/io/buffers.html) optimize input and output by reducing the number of calls to the native API.
+- [Scanning and Formatting](https://docs.oracle.com/javase/tutorial/essential/io/scanfor.html) allows a program to read and write formatted text.
+- [I/O from the Command Line](https://docs.oracle.com/javase/tutorial/essential/io/cl.html) describes the Standard Streams and the Console object.
+- [Data Streams](https://docs.oracle.com/javase/tutorial/essential/io/datastreams.html) handle binary I/O of primitive data type and `String` values.
+- [Object Streams](https://docs.oracle.com/javase/tutorial/essential/io/objectstreams.html) handle binary I/O of objects.
+
+
+### Byte Stream
+ - Handle input and output of 8-bit bytes
+ - quite not recommended for dealing with text files due to a lot of conversions taking place
+ - each of the operation is handled directly by the underlying OS so can be less efficient, cause it follows a lot of procedures
+
+```java 
+import java.io.*;
+
+public class Sample {
+
+    public static void main(String[] args) throws Exception {// not recommended, instead handle the exception
+        String path="Data.txt";
+        FileInputStream read=new FileInputStream(path);
+        FileOutputStream write=new FileOutputStream("writefile.txt",true); // true is used to append in the file
+        int c=0;
+        while((c=read.read())!=-1){
+            System.out.println((char)c);
+        }
+        String s="this is s sample output\n and this is next line";
+        for(char ch:s.toCharArray()){
+            write.write(ch);
+        }
+        read.close(); // always close the stream after using
+        write.close();  // always close the stream after using
+    } 
+}
+```
+
+
+### Character stream
+- directly deals with the Unicode values
+- no conversion takes place
+- each of the operation is handled directly by the underlying OS so can be less efficient, cause it follows a lot of procedures
+
+```java 
+import java.io.*;
+
+public class Sample {
+
+    public static void main(String[] args) throws Exception {
+        String path="Data.txt";
+        FileReader read=new FileReader(path);
+        FileWriter write=new FileWriter("writefile.txt",true);
+        int c=0;
+        while((c=read.read())!=-1){
+            System.out.println((char)c);
+        }
+        String s="this is s sample output\n and this is next line";
+        for(char ch:s.toCharArray()){
+            write.write(ch);
+        }
+    }
+}
+```
+
+- For line oriented file operation 
+```java 
+import java.io.*;
+
+public class Sample {
+
+    public static void main(String[] args) throws Exception {
+        String path="Data.txt";
+        BufferedReader read=new BufferedReader(new FileReader(path));
+        PrintWriter write=new PrintWriter(new FileWriter("writefile.txt"));
+        String c;
+        while((c=read.readLine())!=null){
+            System.out.println(c);
+        }
+        String s[]=new String[]{"this is s sample output\n"," and this is next line"};
+        for(String sh:s){
+            write.println(sh);
+        }
+        write.flush(); //to flush the content into the file, can be used if it takes time ti close the write
+        read.close();
+        write.close();
+    }
+}
+```
+
+
+### Buffered streams
+- Buffered input streams read data from a memory area known as a _buffer_; the native input API is called only when the buffer is empty.
+- buffered output streams write data to a buffer, and the native output API is called only when the buffer is full.
+- so to call the write API before the buffer is full we use **`.flush()`** to immediately call the API and write in the file.
+
+```java 
+import java.io.*;
+
+public class Sample {
+
+    public static void main(String[] args) throws Exception {
+        String path="Data.txt";
+        BufferedReader reader=new BufferedReader(new FileReader(path));
+        BufferedWriter writer=new BufferedWriter(new FileWriter("writefile.txt",true));
+        String c;
+        while((c=reader.readLine())!=null){
+            System.out.println(c);
+        }
+        String s[]=new String[]{"this is s sample output\n"," and this is next line"};
+        for(String sh:s){
+            writer.write(sh);;
+        }
+        writer.flush();;
+        reader.close();
+        writer.close();
+    }
+}
+```
+
+
+### Scanning
+- Objects of type Scanner are useful for breaking down formatted input into tokens and translating individual tokens according to their data type.
+```java
+import java.io.*;
+import java.util.Scanner;
+
+import javax.sound.sampled.SourceDataLine;
+
+public class Sample { // prints each word in the file line by line
+
+    public static void main(String[] args) throws Exception {
+        String path="Data.txt";
+        Scanner scan=new Scanner(new BufferedReader(new FileReader(path)));
+        scan.useDelimiter(",");
+        String word;
+        while(scan.hasNext()){ // hasnextLine() & nextLine for each line
+            System.out.println(scan.next());
+        }
+    }
+}
+```
+
+
+
+### Formatting
+- Can be done with the help of 
+	- print and println statements
+	- format statement --- works very much like **`printf`**
+```java
+System.out.format("%f, %<+1.10f %n", Math.PI);
+```
+
+### I/O for command line
+- **Standard Streams**
+	- Input
+		- System.in
+	- Output
+		- System.out
+		- System.err
+	- These are of ByteStreams despite being standard and most used due to historical reasons.
+
+- **Console 
+	- It is of character streams and does provide a lot of functionalities and more than the standard ones.
+	- The console object has to be requested form the os before using it.
+	- It provides safe password entry by making entry in console invisible and return the password as character array
+```java 
+import java.io.Console;
+
+public class Sample {
+
+    public static void main(String[] args) throws Exception {
+        Console c=System.console();
+        String name=c.readLine("Enter name:");
+        System.out.println(name);
+        char []ar=c.readPassword("Enter pass:");
+        for (char i:ar){
+            System.out.println(i);
+        }
+    }
+}
+```
+
+
+### Data Streams
+
+| Data type | Output Method                  | Input Method                 | Sample Value     |
+| --------- | ------------------------------ | ---------------------------- | ---------------- |
+| `double`  | `DataOutputStream.writeDouble` | `DataInputStream.readDouble` | `19.99`          |
+| `int`     | `DataOutputStream.writeInt`    | `DataInputStream.readInt`    | `12`             |
+| `String`  | `DataOutputStream.writeUTF`    | `DataInputStream.readUTF`    | `"Java T-Shirt"` |
+
+```java 
+class Hostel{
+    public static void main(String[] args)  throws Exception {
+        String path="src/Data.txt";
+        int ar[]=new int[]{1,2,3,4,5};
+        String []sr=new String[]{"a","b","c","d","e"};
+        DataOutputStream out=new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path,true)));
+        for (int i=0;i<5;i++){
+            out.writeInt(ar[i]);
+            out.writeUTF(sr[i]);
+        }
+        out.flush();
+        DataInputStream in=new DataInputStream(new BufferedInputStream(new FileInputStream(path)));
+        try {
+            while (true) {
+                int a=in.readInt();
+                String s = in.readUTF();
+                System.out.println(a+" "+s);
+            }
+        }
+        catch(EOFException e){
+            System.out.println("End of the file");
+        }
+        finally{
+            in.close();
+            out.close();
+        }
+    }
+}
+```
+
+
+
+### Object Streams
+- The `writeObject` and `readObject` methods are simple to use, but they contain some very sophisticated object management logic. This isn't important for a class like Calendar, which just encapsulates primitive values. But many objects contain references to other objects. If `readObject` is to reconstitute an object from a stream, it has to be able to reconstitute all of the objects the original object referred to. These additional objects might have their own references, and so on. In this situation, `writeObject` traverses the entire web of object references and writes all objects in that web onto the stream. Thus a single invocation of `writeObject` can cause a large number of objects to be written to the stream.
+- A stream can only contain one copy of an object, though it can contain any number of references to it.
+
+
+
+**Serialization** is a mechanism of converting the state of an object into a byte stream.
+
+**Important Points of Serialisation:**
+
+- **Platform-Independent:** In Java, the serialization is a platform-independent process. It means that if we serialize an object using a byte stream on one platform can be easily deserialized on different platforms.
+- **Serializable Interface:** If we want to make a class serializable, then it must implement the Serializable interface. This interface does not contain any methods or variables ( marker interface), but it gives a signal that the class is ready for serialization.
+
+**Deserialization** is the reverse process where the byte stream is used to recreate the actual Java object in memory. This mechanism is used to persist the object.
+
+**Important Points of Deserialization:**
+
+- **Rebuilds Objects:** Deserialization takes the byte stream and turns it back into the original object with the same state as before.
+- **Platform-Independent:** Deserialization works well with different platforms without any issues.
+- **Class Must Be Available:** When we deserialize an object, it is necessary that the class definition be present in the program.
+
+```java 
+import java.io.*;
+
+class Demo implements Serializable {
+    public int a;
+    public String b;
+
+    public Demo(int a, String b) {
+        this.a = a;
+        this.b = b;
+    }
+}
+
+public class Geeks {
+    public static void main(String[] args) {
+        Demo object = new Demo(1, "geeksforgeeks");
+        String filename = "file.ser";
+
+        // Serialization
+        try {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(object);
+            out.close();
+            file.close();
+            System.out.println("Object has been serialized");
+
+        } catch (IOException ex) {
+            System.out.println("IOException is caught");
+        }
+
+        Demo object1 = null;
+
+        // Deserialization
+        try {
+            FileInputStream file = new FileInputStream(filename);
+            ObjectInputStream in = new ObjectInputStream(file);
+            object1 = (Demo) in.readObject();
+            in.close();
+            file.close();
+            System.out.println("Object has been deserialized");
+            System.out.println("a = " + object1.a);
+            System.out.println("b = " + object1.b);
+
+        } catch (IOException ex) {
+            System.out.println("IOException is caught");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("ClassNotFoundException is caught");
+        }
+    }
+}
+```
+
+
