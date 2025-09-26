@@ -77,7 +77,7 @@
 		- non-primordial/extension classloader -- all the class loader other than the bootloader class. like libraries
 		- user-defined classloader
 		
-	- **Bytecode verifier 6
+	- **Bytecode verifier 
 		- checks if the code does any damaging actions
 		- check for security and integrity are maintained or not
 	- **JIT compiler
@@ -140,7 +140,7 @@
 |                  |                                                                                   |
 
 - ### Default keyword
-	- this keyword can only be used in two places
+	- ==**`default`**== keyword can only be used in two places
 		- switch case
 		- [[#Interface]]
 
@@ -188,8 +188,8 @@
 - Supports autoboxing and unboxing
 
 ### Wrapper classes
-- Create to wrap the primitive types in java
-- since all the application in java deal with objects, so to adapt the primitive to objects wrapper class is introduced
+- Create a wrap of the primitive types to object  in java
+- since all the application in java deal with objects, so to adapt the primitive to objects, wrapper class is introduced
 - it is **Immutable**
 - Provides many utility functions to wonk on the primitive type and their values
 
@@ -325,7 +325,7 @@ i = obj.intValue();
 		-  a plain `continue` keyword that skips the current iteration the loop in which it is present(the immediate loop from its scope)
 
 ### Components of method declaration
-- **Modifier
+- **Access Modifier
 - **Return Type
 - **Method Name
 - **Parameters
@@ -420,8 +420,9 @@ i = obj.intValue();
 - it is a blueprint for a class, serving as a contract that defines a set of abstract methods and constant fields. It specifies what a class should do, but not how it should do it.
 - Interface can be inherited
 - Provide complete abstraction
-- **`default`** keyword is allowed in here
+- ==**`default`**== keyword is allowed in here
 	- in need of adding new member or function and that is not needed to be a part of all the implemented class then default keyword is used
+	- in case of overriding, can only be overridden with ==**`public`**== 
 
 ### Functional interface
 - Has only one abstract method irrespective of the other methods
@@ -465,7 +466,7 @@ i = obj.intValue();
 - **it is converting of objects into byte stream so that it can be 
 	- saved in a file
 	- transferred through a network
-- It is done with the help of **Serializable** interface
+- It is done with the help of **==Serializable**== interface
 - Helps in storing the current state of an object and reuse it later
 ```java 
 import java.io.*;
@@ -588,8 +589,9 @@ public sealed class parent permits child, grandchile{
 - **Unchecked exception** 
 	- Errors
 	- Run-time Exceptions
+- ==**NOTE**== - when try throws an exception and finally as well throws, then exception by try will be lost if the catch is not used.
 ### Suppressed exceptions
-- When a try block throws an exception and while closing the resources, the try-wth-resource as well throws an exception then the try-with-resource exception is suppressed within the primary and delivered.
+- When a try block throws an exception and while closing the resources, the try-with-resource as well throws an exception then the try-with-resource exception is suppressed within the primary exception and delivered.
 - it can be accessed by
 ```java 
 } catch (Exception e) {
@@ -601,12 +603,12 @@ public sealed class parent permits child, grandchile{
 ```
 
 ### Try-with-resource
-- Apart from having the try-catch-finally functionality, it has resources created within parenthesis after `try` keyword
+- Apart from having the try-catch-finally functionality, it has autocloseable  resources created within parenthesis after `try` keyword
 - Such resources should implement **AutoCloseable/Closeable**. interface
 - This the resources are automatically closed at the end of try block.
 
 ### Chained Exception
-- when an exception is caught, it throws another exception to a higher exception handles containing the main exception .
+- when an exception is caught, it throws another exception to a higher exception handler containing the main exception .
 - it helps in associating one exception with other exception, through proper description.
 
 
@@ -614,6 +616,7 @@ public sealed class parent permits child, grandchile{
 
 ### Creating Exception classes
 - **Note** -- If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
+- Can be created by extending ==**`Exception`**== class
 
 ### Advantages of exception
 - **Separates error/exception prone code from regular code
@@ -798,7 +801,7 @@ difference.removeAll(s2);
 ### Dequeue interface
 - It is a **double-ended queue** 
 - It supports insertion and deletion of elements on both the ends
-- It implements both stack and queue at the same time
+- It implements the features of both stack and queue at the same time
 
 | Type of Operation | First Element (Beginning of the `Deque` instance) | Last Element (End of the `Deque` instance) |
 | ----------------- | ------------------------------------------------- | ------------------------------------------ |
@@ -845,8 +848,8 @@ difference.removeAll(s2);
 	- states how full the hashmap can be before its size is increased.
 - Not thread-safe
 	- is not synchronized and can lead to racing conditions 
-- Hashtable is thread-safe
-	- use synchronized methods, but has performance overhead
+- Hash-table is thread-safe
+	- use synchronized methods, but has performance overhead due to obtaining lock for the operations
 
 ### LinkedHashMap
 - Has features of both hash table and doubly-linkedlist
@@ -978,7 +981,7 @@ public class Sample {
 ### Buffered streams
 - Buffered input streams read data from a memory area known as a _buffer_; the native input API is called only when the buffer is empty.
 - buffered output streams write data to a buffer, and the native output API is called only when the buffer is full.
-- so to call the write API before the buffer is full we use **`.flush()`** to immediately call the API and write in the file.
+- so to call the write API before the buffer is full we use ==**`.flush()`**== to immediately call the API and write in the file.
 
 ```java 
 import java.io.*;
@@ -1184,3 +1187,90 @@ public class Geeks {
 ```
 
 
+
+
+## Threading in java
+
+- The JVM starts with a single non-daemon thread in the start.
+- It continues to execute thread until
+	- exit() method of `RunTime` class is called,  or
+	- all the Non-Daemon thread have died
+
+- A customized thread class can be created by
+	- implementing ==**`Runnable`**== interface
+	- extending ==**`Thread`**== class
+	- creating anonymous class of ==**`Thread`**== 
+- The Main class thread can be accessed with the help of ==**`Thread.currentThread()`**==
+- **`Runnable`** interface has only the run function declared in it;
+
+**When to Use Which**
+- **Use Runnable:**
+    This is the recommended and preferred approach for most scenarios where you only need to define the task to be executed. You instantiate a Thread object and pass your Runnable object to it to start the task. 
+    
+- **Use Thread:**
+    Extend the Thread class only in very specific, rare cases where you need to override or specialize other behaviors of the Thread class itself, such as the `interrupt()` method, in addition to the `run()` method.
+
+
+#### Thread lifecycle and states
+
+![[Pasted image 20250926112146.png]]
+
+
+### Synchronization 
+- Threads communicate primarily by sharing access to fields and the objects reference fields refer to. This form of communication is extremely efficient, but makes two kinds of errors possible: _thread interference_ and _memory consistency errors_. The tool needed to prevent these errors is _synchronization_.
+
+- However, synchronization can introduce _thread contention_, which occurs when two or more threads try to access the same resource simultaneously _and_ cause the Java runtime to execute one or more threads more slowly, or even suspend their execution. [Starvation and livelock](https://docs.oracle.com/javase/tutorial/essential/concurrency/starvelive.html) are forms of thread contention. See the section [Liveness](https://docs.oracle.com/javase/tutorial/essential/concurrency/liveness.html) for more information.
+
+- It helps in ensuring integrity among the threads.
+- ==**constructors**== cannot be declared as synchronized.
+
+
+### Intrinsic lock
+- Synchronization is built around an internal entity known as ==**intrinsic/monitor locks**==.
+- when a ==**static synchronized method is invoked**==, since a static method is associated with a class, not an object. In this case, the thread acquires the intrinsic lock for the ==**`Class`**== object associated with the class. Thus access to class's static fields is controlled by a lock that's distinct from the lock for any instance of the class.
+
+#### Reentrant Synchronization
+
+- Recall that a thread cannot acquire a lock owned by another thread. But a thread _can_ acquire a lock that it already owns. Allowing a thread to acquire the same lock more than once enables _reentrant synchronization_. This describes a situation where synchronized code, directly or indirectly, invokes a method that also contains synchronized code, and both sets of code use the same lock. Without reentrant synchronization, synchronized code would have to take many additional precautions to avoid having a thread cause itself to block.
+
+### Synchronized statement
+
+```java
+public void addName(String name) {
+    synchronized(this) {
+        lastName = name;
+        nameCount++;
+    }
+    nameList.add(name);
+}
+```
+
+```java
+public class MsLunch {
+    private long c1 = 0;
+    private long c2 = 0;
+    private Object lock1 = new Object();
+    private Object lock2 = new Object();
+
+    public void inc1() {
+        synchronized(lock1) {
+            c1++;
+        }
+    }
+
+    public void inc2() {
+        synchronized(lock2) {
+            c2++;
+        }
+    }
+}
+```
+
+
+## Starvation
+
+_Starvation_ describes a situation where a thread is unable to gain regular access to shared resources and is unable to make progress. This happens when shared resources are made unavailable for long periods by "greedy" threads. For example, suppose an object provides a synchronized method that often takes a long time to return. If one thread invokes this method frequently, other threads that also need frequent synchronized access to the same object will often be blocked.
+
+## Livelock
+
+A thread often acts in response to the action of another thread. If the other thread's action is also a response to the action of another thread, then _livelock_ may result. As with deadlock, livelocked threads are unable to make further progress. However, the threads are not blocked — they are simply too busy responding to each other to resume work. This is comparable to two people attempting to pass each other in a corridor: Alphonse moves to his left to let Gaston pass, while Gaston moves to his right to let Alphonse pass. Seeing that they are still blocking each other, Alphone moves to his right, while Gaston moves to his left. They're still blocking each other, so...
