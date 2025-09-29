@@ -5,5 +5,6 @@
   "markdown-prettifier",
   "obsidian-plugin-prettier",
   "obsidian-git",
-  "auto-correct-capitals"
+  "auto-correct-capitals",
+  "obsidian-languagetool-plugin"
 ]

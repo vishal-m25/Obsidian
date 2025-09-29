@@ -1,4 +1,7 @@
 
+- Java is always pass-by-value
+
+
 ### Advantages of java 8
 - Introduced lambda function
 - Introduced default and static methods in interfaces
@@ -124,6 +127,7 @@
 | ------------------------------------------------------------------------ | --- |
 | Modularity<br>to avoid naming clash between classes<br>code Organization |     |
 |                                                                          |     |
+\
 
 
 
@@ -425,6 +429,10 @@ i = obj.intValue();
 	- in case of overriding, can only be overridden with ==**`public`**== 
 
 ### Functional interface
+- Functional Interfaces are mainly used in Lambda expressions, Method reference, and constructor references. 
+- In functional programming, code can be treated as data. For this purpose, Lambda expressions are introduced. They can be used to pass a block of code to another method or object. Functional Interface serves as a data type for Lambda expressions. 
+- Since a Functional interface contains only one abstract method, the implementation of that method becomes the code that gets passed as an argument to another method.
+- Introduces to enable lambda function in interface
 - Has only one abstract method irrespective of the other methods
 - **Consumer** -- when dealing with single argument
 - **Predicate** -- when dealing with boolean value
@@ -661,6 +669,13 @@ public sealed class parent permits child, grandchile{
 | Set       | No                | No (except LinkedHashSet) | Yes (TreeSet)           | Only one null (HashSet)                  |
 | Queue     | Yes               | Yes                       | Priority-based possible | One null (except PriorityQueue)          |
 | sMap      | No (for keys)     | Depends                   | TreeMap sorted by keys  | One null key (HashMap), many null values |
+
+### Default size for collections
+- **ArrayList:** In Java 8 and later, the default initial capacity is 0, but it's lazily initialized to 10 when the first element is added. In older versions, it was directly initialized to 10.
+- **Vector:** The default initial capacity is 10.
+- **HashMap, HashSet, LinkedHashMap, LinkedHashSet, ConcurrentHashMap, WeakHashMap:** The default initial capacity is typically 16.
+- **Hashtable:** The default initial capacity is 11.
+- **LinkedList, TreeSet, TreeMap:** These classes do not have a concept of a fixed "capacity" in the same way as array-backed collections.
 
 ### Collection interface
 - It is used to pass around group of objects where maximum generality is desired.
@@ -900,7 +915,7 @@ TreeMap/TreeSet does not allow null value because it maintains certain ordering 
 ### Byte Stream
  - Handle input and output of 8-bit bytes
  - quite not recommended for dealing with text files due to a lot of conversions taking place
- - each of the operation is handled directly by the underlying OS so can be less efficient, cause it follows a lot of procedures
+ - each of the operation is handled directly by the underlying OS, so can be less efficient, cause it follows a lot of procedures
 
 ```java 
 import java.io.*;
@@ -1035,7 +1050,7 @@ public class Sample { // prints each word in the file line by line
 ### Formatting
 - Can be done with the help of 
 	- print and println statements
-	- format statement --- works very much like **`printf`**
+	- ==**`format`**== statement --- works very much like **`printf`**
 ```java
 System.out.format("%f, %<+1.10f %n", Math.PI);
 ```
@@ -1114,7 +1129,8 @@ class Hostel{
 
 ### Object Streams
 - The `writeObject` and `readObject` methods are simple to use, but they contain some very sophisticated object management logic. This isn't important for a class like Calendar, which just encapsulates primitive values. But many objects contain references to other objects. If `readObject` is to reconstitute an object from a stream, it has to be able to reconstitute all of the objects the original object referred to. These additional objects might have their own references, and so on. In this situation, `writeObject` traverses the entire web of object references and writes all objects in that web onto the stream. Thus a single invocation of `writeObject` can cause a large number of objects to be written to the stream.
-- A stream can only contain one copy of an object, though it can contain any number of references to it.
+- A stream can only contain one copy of an object, though it can contain any number of references to it. 
+- Cannot be used on class objects that does not implement serializable interface.
 
 
 
@@ -1231,7 +1247,7 @@ public class Geeks {
 
 #### Reentrant Synchronization
 
-- Recall that a thread cannot acquire a lock owned by another thread. But a thread _can_ acquire a lock that it already owns. Allowing a thread to acquire the same lock more than once enables _reentrant synchronization_. This describes a situation where synchronized code, directly or indirectly, invokes a method that also contains synchronized code, and both sets of code use the same lock. Without reentrant synchronization, synchronized code would have to take many additional precautions to avoid having a thread cause itself to block.
+- Recall that a thread cannot acquire a lock owned by another thread. But a thread _can_ acquire a lock that it already owns. Allowing a thread to acquire the same lock more than once enables _reentrant synchronization_. This describes a situatideserializeon where synchronized code, directly or indirectly, invokes a method that also contains synchronized code, and both sets of code use the same lock. Without reentrant synchronization, synchronized code would have to take many additional precautions to avoid having a thread cause itself to block.
 
 ### Synchronized statement
 
@@ -1267,10 +1283,191 @@ public class MsLunch {
 ```
 
 
-## Starvation
+### Starvation
 
 _Starvation_ describes a situation where a thread is unable to gain regular access to shared resources and is unable to make progress. This happens when shared resources are made unavailable for long periods by "greedy" threads. For example, suppose an object provides a synchronized method that often takes a long time to return. If one thread invokes this method frequently, other threads that also need frequent synchronized access to the same object will often be blocked.
 
-## Livelock
+### Livelock
 
 A thread often acts in response to the action of another thread. If the other thread's action is also a response to the action of another thread, then _livelock_ may result. As with deadlock, livelocked threads are unable to make further progress. However, the threads are not blocked — they are simply too busy responding to each other to resume work. This is comparable to two people attempting to pass each other in a corridor: Alphonse moves to his left to let Gaston pass, while Gaston moves to his right to let Alphonse pass. Seeing that they are still blocking each other, Alphone moves to his right, while Gaston moves to his left. They're still blocking each other, so...
+
+
+### Executors
+- in large-scale applications the thread management and creation has to be separated from the rest of the code.
+- and the objects that encapsulates these functions are called ==**Executors**==.
+- Executor interfaces
+	- **`Executor`**
+		- Has only a function ==**`execute(Runnable obj)`**==
+	- **`ExecutorService`**
+		- Extends ==**Executor**== , has ==**`submit()`**== that accepts both Runnable and Callable Object
+	- **`ScheduledExecutorService`**
+		- Extends ==**ExecutorService**== and has functions with fixed delays
+
+### Thread pools
+- It consists of worker threads
+- those workers not are separate form Runnable of Callable threads used to execute multiple tasks.
+- Usage of these threads reduce overhead due to thread creation.
+- **`Fixed Thread Pool`**
+	- It always holds a specified number of thread with it.
+	- when one dies during execution, then another one is created.
+	- the tasks are submitted to these threads with the help of a queue.
+
+
+
+
+
+## JDBC
+
+
+```java 
+import com.mysql.cj.x.protobuf.MysqlxPrepare;  
+  
+import java.sql.*;  
+import java.util.Arrays;  
+  
+public class DBConnector {  
+    public static void main(String[] args) {  
+        Connection connection = null;  
+        try {  
+            // Load the MySQL JDBC driver  
+            Class.forName("com.mysql.cj.jdbc.Driver");  
+  
+            // Establish the connection  
+            connection = DriverManager.getConnection(  
+                    "jdbc:mysql://localhost:3306/",  
+                    "root", "12345678");  
+  
+            System.out.println("Database connected successfully!");  
+            Statement stm = connection.createStatement();  
+//            stm.execute("drop database mydb;");  
+//            stm.execute(" create database mydb;");  
+            stm.execute(" use mydb;");  
+//            boolean result = stm.execute("create table sample (roll int ,name varchar(30),discription varchar(30));");  
+//            System.out.println(result);  
+//  
+//            boolean insert = stm.execute("insert into sample values(1,'abas','owner'),(2,'balu','MD')");  
+//            System.out.println(insert);  
+  
+  
+            // ##########   prepared statements//            String prepinsert = "insert into sample values (?,?,?);";  
+//            PreparedStatement ins=connection.prepareStatement(prepinsert);  
+//            ins.setInt(1,5);  
+//            ins.setString(2,"logesh");  
+//            ins.setString(3,"employee");  
+//            ins.executeUpdate();  
+  
+  
+            ResultSet show=stm.executeQuery("select * from sample");  
+            while(show.next()){  
+                System.out.println(show.getInt("roll")+" "+show.getString("name")+" "+show.getString("discription"));  
+            }  
+  
+//            stm.execute("drop table sample;");  
+  
+        } catch (Exception exception) {  
+            System.out.println("Connection failed: " + exception);  
+        } finally {  
+            try {  
+                if (connection != null) {  
+                    connection.close();  
+                    System.out.println("Connection closed.");  
+                }  
+            } catch (SQLException e) {  
+                e.printStackTrace();  
+            }  
+        }  
+    }  
+}
+```
+
+### PreparedStatements
+- it is used to avoid ==**SQL injection attacks**== 
+- once create it become a precompiled statement and on setting the values takes less time to execute than the normal statement.
+
+
+### Transaction
+- Normally the commit is set to be auto and commit after every statement being executed.
+- in here the commit can be set off ==**`connnection.setAutoCommit(false);`**==
+- and the commit happen only when the commit method is called. ==**`connection.commit();`**==
+
+
+### SavePoint and rollback
+- ==**`Savepoint save1 = con.setSavepoint();`**==
+- ==**`con.rollback(save1);`**==
+- once given commit after savepoint then you cannot rollback to the saveoint.
+
+
+
+### Traditional JDBC RowSet
+
+```java   
+// Creation
+   RowSetFactory factory = RowSetProvider.newFactory();
+
+    try (JdbcRowSet jdbcRs = factory.createJdbcRowSet()) {
+      jdbcRs.setUrl(this.settings.urlString);
+      jdbcRs.setUsername(this.settings.userName);
+      jdbcRs.setPassword(this.settings.password);
+      jdbcRs.setCommand("select * from COFFEES");
+      jdbcRs.execute();
+      // ...
+```
+
+### Navigating JdbcRowSet Objects
+
+A `ResultSet` object that is not scrollable can use only the `next` method to move its cursor forward, and it can move the cursor only forward from the first row to the last row. A default `JdbcRowSet` object, however, can use all of the cursor movement methods defined in the `ResultSet` interface.
+
+jdbcRs.absolute(4);
+jdbcRs.previous();
+
+### Updating Column Values
+
+jdbcRs.absolute(3);
+jdbcRs.updateFloat("PRICE", 10.99f);
+jdbcRs.updateRow();
+
+The code moves the cursor to the third row and changes the value for the column `PRICE` to 10.99, and then updates the database with the new price.
+
+### Inserting Rows
+
+
+jdbcRs.moveToInsertRow();
+jdbcRs.updateString("COF_NAME", "HouseBlend");
+jdbcRs.updateInt("SUP_ID", 49);
+jdbcRs.updateFloat("PRICE", 7.99f);
+jdbcRs.updateInt("SALES", 0);
+jdbcRs.updateInt("TOTAL", 0);
+jdbcRs.insertRow();
+
+jdbcRs.moveToInsertRow();
+jdbcRs.updateString("COF_NAME", "HouseDecaf");
+jdbcRs.updateInt("SUP_ID", 49);
+jdbcRs.updateFloat("PRICE", 8.99f);
+jdbcRs.updateInt("SALES", 0);
+jdbcRs.updateInt("TOTAL", 0);
+jdbcRs.insertRow();
+
+When you call the method `insertRow`, the new row is inserted into the `jdbcRs` object and is also inserted into the database. The preceding code fragment goes through this process twice, so two new rows are inserted into the `jdbcRs` object and the database.
+
+### Deleting Rows
+
+As is true with updating data and inserting a new row, deleting a row is just the same for a `JdbcRowSet` object as for a `ResultSet` object. The owner wants to discontinue selling French Roast decaffeinated coffee, which is the last row in the `jdbcRs` object. In the following lines of code, the first line moves the cursor to the last row, and the second line deletes the last row from the `jdbcRs` object and from the database:
+
+jdbcRs.last();
+jdbcRs.deleteRow();
+
+
+### Connection Pooling
+- operations from the different Context instances are multiplexed onto the same connection. You can control the degree of sharing by deciding when to create a new initial context and when to obtain a derived Context instance from an existing Context instance.
+
+- the LDAP service provider maintains a pool of (possibly) previously used connections and assigns them to a Context instance as needed. When a Context instance is done with a connection (closed or garbage collected), the connection is returned to the pool for future use. Note that this form of sharing is sequential: a connection is retrieved from the pool, used, returned to the pool, and then, retrieved again from the pool for another Context instance.
+
+
+#### When Not to Use Pooling
+
+- Pooled connections are intended to be reused. Therefore, if you plan to perform operations on a Context instance that might alter the underlying connection's state, then you should not use connection pooling for that Context instance. For example, if you plan to invoke the Start TLS extended operation on a Context instance, or plan to change security-related properties (such as "java.naming.security.principal" or "java.naming.security.protocol") after the initial context has been created, you should not use connection pooling for that Context instance because the LDAP provider does not track any such state changes. If you use connection pooling in such situations, you might be compromising the security of your application.
+
+
+
+## Optional class
+-  was introduced to avoid NullPointerException when referring to a variable/ object that is not initialized.
