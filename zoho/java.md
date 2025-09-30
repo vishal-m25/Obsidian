@@ -224,6 +224,7 @@
 - it is final by design
 - can implement interfaces
 - It can have methods, constructors for complex use case
+- yet the constructor can be only called by compiler
 - it provides type safety
 ```java 
 public enum Day {
@@ -429,7 +430,7 @@ i = obj.intValue();
 	- in case of overriding, can only be overridden with ==**`public`**== 
 
 ### Functional interface
-- Functional Interfaces are mainly used in Lambda expressions, Method reference, and constructor references. 
+- Functional Interfaces are mainly used for Lambda expressions, Method reference, and constructor references. 
 - In functional programming, code can be treated as data. For this purpose, Lambda expressions are introduced. They can be used to pass a block of code to another method or object. Functional Interface serves as a data type for Lambda expressions. 
 - Since a Functional interface contains only one abstract method, the implementation of that method becomes the code that gets passed as an argument to another method.
 - Introduces to enable lambda function in interface
@@ -470,35 +471,9 @@ i = obj.intValue();
 - The enclosing class variable should be accessed with **`ClassName.this.x`**
 
 
-### Serialization 
-- **it is converting of objects into byte stream so that it can be 
-	- saved in a file
-	- transferred through a network
-- It is done with the help of **==Serializable**== interface
-- Helps in storing the current state of an object and reuse it later
-```java 
-import java.io.*;
-
-public class SerializeExample {
-    public static void main(String[] args) {
-        Student s1 = new Student(101, "Alice");
-
-        try {
-            FileOutputStream fos = new FileOutputStream("student.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-            oos.writeObject(s1); // 🔹 Serialization
-            oos.close();
-            fos.close();
-
-            System.out.println("✅ Object serialized and saved to student.ser");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-```
+### Inner class 
+- Declared directly inside a class block
+- considered similar to fields and methods of the class.
 
 ### Local Classes
 - can be created inside a block
@@ -587,13 +562,46 @@ public sealed class parent permits child, grandchile{
 }
 ```
 
+
+### Serialization 
+- **it is converting of objects into byte stream so that it can be 
+	- saved in a file
+	- transferred through a network
+- It is done with the help of **==Serializable**== interface
+- Helps in storing the current state of an object and reuse it later
+```java 
+import java.io.*;
+
+public class SerializeExample {
+    public static void main(String[] args) {
+        Student s1 = new Student(101, "Alice");
+
+        try {
+            FileOutputStream fos = new FileOutputStream("student.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(s1); // 🔹 Serialization
+            oos.close();
+            fos.close();
+
+            System.out.println("✅ Object serialized and saved to student.ser");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+
 ## Exception 
 - It is an exceptional event that occurs during the execution of the program that disrupts the flow of instructions.
 - when an exceptional event occurs, the method creates an object called __exception__ and sends it to the runtime system.
 - when an exception occurs, runtime searches the call stack(method invocations) sequentially to check for an matching exception handler, if matches, handles it and continues the program from that point, else the program is terminated.
+- ==**Errors**== in specific are not recommended to be handled
 
 - **Checked exception** 
-	- Compile time errors
+	- Compile time errors (checked during compile time)
 - **Unchecked exception** 
 	- Errors
 	- Run-time Exceptions
