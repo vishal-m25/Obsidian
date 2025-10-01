@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "a7355751cefdc411",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "zoho/topics.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "topics"
-            }
-          },
-          {
             "id": "87e67cce49eef438",
             "type": "leaf",
             "state": {
@@ -36,12 +22,12 @@
             }
           },
           {
-            "id": "5456cca4a8bb4e0a",
+            "id": "3a863062be700302",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "zoho/Assigned topics.md",
+                "file": "Learnings/Assigned topics.md",
                 "mode": "source",
                 "source": false
               },
@@ -49,8 +35,7 @@
               "title": "Assigned topics"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -210,11 +195,11 @@
       "switcher:Open quick switcher": false
     }
   },
-  "active": "81bec6e31916f035",
+  "active": "87e67cce49eef438",
   "lastOpenFiles": [
-    "Learnings/topics.md",
-    "Learnings/java.md",
     "Learnings/Assigned topics.md",
+    "Learnings/java.md",
+    "Learnings/topics.md",
     "Learnings/images/image 3.png",
     "clg/AMCAT.md",
     "personal/Configurations.md",

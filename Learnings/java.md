@@ -483,11 +483,15 @@ i = obj.intValue();
 	- can access final or effectively final variables 
 
 ### Anonymous class
+- is ==**`final`**== by default
+- cannot have instance , constructor
+- cannot have static declaration inside them
 -  You can also declare an inner class within the body of a method without naming the class. 
 - instance and member access is same as local class
 - Can be created with
 	- Interface
 	- extend an abstract or concrete class
+-  Compiler see these classes as ==**`Outer$1.class`**== 
 	
 ```java
 // Java Program to Demonstrate Anonymous inner class
@@ -595,6 +599,8 @@ public class SerializeExample {
 
 
 ## Exception 
+
+- All classes are descendants of ==**`Throwable`**== class 
 - It is an exceptional event that occurs during the execution of the program that disrupts the flow of instructions.
 - when an exceptional event occurs, the method creates an object called __exception__ and sends it to the runtime system.
 - when an exception occurs, runtime searches the call stack(method invocations) sequentially to check for an matching exception handler, if matches, handles it and continues the program from that point, else the program is terminated.
@@ -606,6 +612,14 @@ public class SerializeExample {
 	- Errors
 	- Run-time Exceptions
 - ==**NOTE**== - when try throws an exception and finally as well throws, then exception by try will be lost if the catch is not used.
+
+
+- ==**NOTE**== 
+	- when the close method id not called on the resources created when the use is over.
+	- the [[#Garbage Collector]] when the find it, the only free the object memory, the resource will not be closed
+	- thus when this repeat the limit of resource access exceeds.
+
+
 ### Suppressed exceptions
 - When a try block throws an exception and while closing the resources, the try-with-resource as well throws an exception then the try-with-resource exception is suppressed within the primary exception and delivered.
 - it can be accessed by
@@ -651,7 +665,8 @@ public class SerializeExample {
 
 
 ## Collections
-- It inherits Iterable class 
+- It inherits ==**`Iterable`**== class 
+- the ==**Collection**== class has [_synchronization wrappers_](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#synchronizedCollection-java.util.Collection-) that can be used to synchronize any unsynchronized collections 
 
 | Key                  | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -670,6 +685,12 @@ public class SerializeExample {
 	- implementations
 	- algorithm
 
+| Interface | Hash Table                                                                  | Resizable Array                                                                   | Balanced Tree                                                               | Linked List                                                                       | Hash Table + Linked List                                                                |
+| --------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Set`     | [HashSet](https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html) |                                                                                   | [TreeSet](https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html) |                                                                                   | [LinkedHashSet](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashSet.html) |
+| `List`    |                                                                             | [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)   |                                                                             | [LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) |                                                                                         |
+| `Deque`   |                                                                             | [ArrayDeque](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html) |                                                                             | [LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) |                                                                                         |
+| `Map`     | [HashMap](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html) |                                                                                   | [TreeMap](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html) |                                                                                   | [LinkedHashMap](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html) |
 
 | Interface | Allows Duplicates | Ordered                   | Sorted                  | Nulls Allowed                            |
 | --------- | ----------------- | ------------------------- | ----------------------- | ---------------------------------------- |
@@ -690,6 +711,9 @@ public class SerializeExample {
 
 ### For iterations of collections 
 - Aggregate functions
+	- ==**`.stream()`**==
+	- ==**`.parallelStream()`**== can be used when the collection is big enough to make the computer struggle loading entirely
+
 ```java 
 import java.util.ArrayList;
 
