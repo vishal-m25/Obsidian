@@ -20,7 +20,7 @@ journalctl --since [today / 10:00  / ]
 
 
 
-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
+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
 
 
 hypr-lock, sway-lock --> for lock screen

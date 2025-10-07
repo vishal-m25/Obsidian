@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/java.md",
+                "file": "personal/Configurations.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "java"
+              "title": "Configurations"
             }
           },
           {
@@ -197,8 +197,8 @@
   },
   "active": "87e67cce49eef438",
   "lastOpenFiles": [
-    "Learnings/Assigned topics.md",
     "Learnings/java.md",
+    "Learnings/Assigned topics.md",
     "Learnings/topics.md",
     "Learnings/images/image 3.png",
     "clg/AMCAT.md",
