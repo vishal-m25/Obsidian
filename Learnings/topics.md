@@ -41,9 +41,12 @@
 - makes the changes directly in the main memory instead of thread local cache.
 ### private constructor
 - can be used when all the fields and methods are stated as static.
+- To create a singleton class
 ### final methods overloading
 - can be done without any restrictions
+### Final method overriding
+- cannot be done
 
 
 
-## 3rd Oct
+## 24th Oct

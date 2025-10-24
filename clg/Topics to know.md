@@ -8,7 +8,7 @@
  - using `{}` to print a variable in html
 
 # JAVA
-### constant pool 
+### string constant pool 
 	used in strings an area in heap memory where Java stores literal string values. The heap is an area of memory used for run-time operations. When a new variable is created and given a value, Java checks to see if that exact value exists in the pool.
 
 # general

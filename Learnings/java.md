@@ -1,7 +1,7 @@
 
   
 - Java is always pass-by-value  
-  
+- Always the type is checked during the compile time.
 
   
 ### Advantages of java 8  
@@ -46,7 +46,7 @@
 - works:  
 - loads the class file  
 - verify the bytecode for security  
-### JVM ( Java Virtual Machine)  
+### JVM (Java Virtual Machine)  
 - also known as interpreter  
 - uses JIT (just in time: converted from byte-code to machine code wile runtime) for faster execution  
 - works:  
@@ -69,7 +69,7 @@
 6. generate `.class` file  
 7. Keywords are differentiated from others with the help of lexical analyzer, reserved word list and token recognition  
   
-### symbol table  
+#### Symbol table  
 - helps find scope of variable, type checking, verify proper calling of functions.  
 - helps allocate and track memory  
   
@@ -129,7 +129,7 @@
 | ------------------------------------------------------------------------ | --- |  
 | Modularity<br>to avoid naming clash between classes<br>code Organization | |  
 | | |  
-\  
+
   
   
   
@@ -202,22 +202,22 @@
   
   
 ### Operators  
-| Operators | Precedence | execute from |  
-| -------------------- | ----------------------------------------- | ----------------- |  
-| postfix | `_expr_++ _expr_--` | right to left |  
-| unary | `++_expr_ --_expr_ +_expr_ -_expr_ ~ !` | right to left |  
-| multiplicative | `* / %` | left to right |  
-| additive | `+ -` | left to right |  
-| shift | `<< >> >>>` | left to right |  
-| relational | `< > <= >= instanceof` | left to right |  
-| equality | `== !=` | left to right |  
-| bitwise AND | `&` | left to right |  
-| bitwise exclusive OR | `^` | left to right |  
-| bitwise inclusive OR | `\|` | left to right<br> |  
-| logical AND | `&&` | left to right<br> |  
-| logical OR | `\|` | left to right<br> |  
-| ternary | `? :` | right to left |  
-| assignment | `= += -= *= /= %= &= ^= \|= <<= >>= >>>=` | left to right<br> |  
+| Operators            | Precedence                                | execute from      |     |
+| -------------------- | ----------------------------------------- | ----------------- | --- |
+| postfix              | `_expr_++ _expr_--`                       | right to left     |     |
+| unary                | `++_expr_ --_expr_ +_expr_ -_expr_ ~ !`   | right to left     |     |
+| multiplicative       | `* / %`                                   | left to right     |     |
+| additive             | `+ -`                                     | left to right     |     |
+| shift                | `<< >> >>>`                               | left to right     |     |
+| relational           | `< > <= >= instanceof`                    | left to right     |     |
+| equality             | `== !=`                                   | left to right     |     |
+| bitwise AND          | `&`                                       | left to right     |     |
+| bitwise exclusive OR | `^`                                       | left to right     |     |
+| bitwise inclusive OR | \|                                        | left to right<br> |     |
+| logical AND          | `&&`                                      | left to right<br> |     |
+| logical OR           | \| \|                                     | left to right<br> |     |
+| ternary              | `? :`                                     | right to left     |     |
+| assignment           | `= += -= *= /= %= &= ^= \|= <<= >>= >>>=` | left to right<br> |     |
 ### Instanceof  
 - used to compare an object on a specified type. or test if an object is an instance of a class, an instance of a subclass, or an instance of a class that implements a particular interface.  
   
@@ -339,7 +339,7 @@ break test;
 - **Exception list  
 - **Method Body  
   
-### Method Signature ---- Method name and Parameters  
+### Method Signature ---- Method name and Parameters  are only considered
   
 - #### Note -- two methods with same signature and different return types cannot exist, because compiler does not consider return type while differentiating the methods  
   
@@ -366,16 +366,17 @@ break test;
 ### Constructor  
 - final keyword cannot be given to a constructor  
 - types  
-- default constructor  
-- parameterized constructor  
-- No-argument constructor  
-- Copy constructor  
+	- default constructor  
+	- parameterized constructor  
+	- No-argument constructor  
+	- Copy constructor  
+	- Singleton constructor
   
   
 ### Initialization block  
 - **Instance Initialization Block  
 - Used when the initialization is complex and has to be shared across many constructors  
-- runs everytime an object is created  
+- runs every time an object is created  
 ```java  
 class MyClass {  
 int instanceVar;  
@@ -405,7 +406,8 @@ staticVar = 20;
   
   
 ### Final Method  
-- It is used when the sub-classes wanted to use the same initialization code as the parent then can be inherited and used, since the static method does not override on inheritance.  
+- It is used when the subclasses wanted to use the same initialization code as the parent then can be inherited and used, since the static method does not override on inheritance.  
+- cannot be overriden
   
 ### Static method restrictions  
 - Can only access fields or methods that are static  
@@ -415,18 +417,26 @@ staticVar = 20;
 ### Override restrictions  
 - You cannot override a **static/final/private** method.  
 - __protected__ method can only be overridden as __protected__  
-  
-  
+
   
 ### Tightly Coupled  
-- when change in one class does force the other class to change in implementation then it is said to be tightly coupled.  
-- has less number of classes compared to loose coupling  
+- When a change in one class does force the other class to change in implementation, then it is said to be tightly coupled.  
+- Has less number of classes compared to loose coupling  
+- Ex:
+	- Assigning Child class object to Child class reference. 
+	```java
+	Child obj=new child();
+	```
   
 ### Loosely coupled  
 - when change in one class does not affect the structure of another which is using it then it is loosely coupled.  
 - implementation relies heavily on interface and abstract classes.  
-- does include more classes but end up being more flexible than tight due to its representation restrictions.  
-  
+- Does include more classes but end up being more flexible than tight due to its representation restrictions.  
+- Ex:
+	- Assigning Child class object to parent class reference.
+```java
+Parent obj = new Child();
+```
 ### Interface  
 - it is a blueprint for a class, serving as a contract that defines a set of abstract methods and constant fields. It specifies what a class should do, but not how it should do it.  
 - Interface can be inherited  
@@ -434,19 +444,10 @@ staticVar = 20;
 - ==**`default`**== keyword is allowed in here  
 - in need of adding new member or function and that is not needed to be a part of all the implemented class then default keyword is used  
 - in case of overriding, can only be overridden with ==**`public`**==  
-  
-### Functional interface  
-- Functional Interfaces are mainly used for Lambda expressions, Method reference, and constructor references.  
-- In functional programming, code can be treated as data. For this purpose, Lambda expressions are introduced. They can be used to pass a block of code to another method or object. Functional Interface serves as a data type for Lambda expressions.  
-- Since a Functional interface contains only one abstract method, the implementation of that method becomes the code that gets passed as an argument to another method.  
-- Introduces to enable lambda function in interface  
-- Has only one abstract method irrespective of the other methods  
-- **Consumer** -- when dealing witdh single argument  
-- **Predicate** -- when dealing with Boolean value  
-- **Supplier** -- Does not take argument but returns value  
-- **Function** --when dealing with single argument and in need of return functionality  
-  
-  
+- Types
+	- Functional interface
+	- Marker interface
+
 ### Abstract class  
 - Provides partial abstraction  
 - can have both concrete or abstract methods  
@@ -465,11 +466,6 @@ staticVar = 20;
 - types  
 	- Static nested classes  
 		- classes inside a static class can only be s static
-
-
-----------
-
-
 	- non-static nested classes  
 		- member inner class  
 	- local inner class  
@@ -481,9 +477,8 @@ staticVar = 20;
 - If a declaration in the enclosing class is the same in the nested class then the field of the enclosing class is shadowed  
 - The enclosing class variable should be accessed with **`ClassName.this.x`**  
   
-  
 ### Inner class  
-- Declared directly inside a class block  
+- Declared directly inside a class block  and outside methods
 - considered similar to fields and methods of the class.  
   
 ### Local Classes  
@@ -492,7 +487,7 @@ staticVar = 20;
 - **Accessibility**
 	- can access enclosing class fields and members and instance variables
 	- can access final or effectively final variables 
-- It is because when the enclosing method's execution gets over and still the local class instance remains then the class cannot refer to instance variables that does not exist. 
+ - When the enclosing method’s execution ends,  any variables accessed by the local class are **copied (if local)** or **referenced (if instance)**, so the local class instance continues to work safely —   the enclosing context remains reachable through these captured values.
 ```java 
 class Main {
     
@@ -582,11 +577,7 @@ System.out.println("Drawing a Circle");
 }  
 ```  
   
-  
-  
-  
-  
-  
+
 ### Sealed class  
 - it is used when the class needs only to be extended by certain specific classes  
 - it uses`permit` keyword to allow specific classes  
@@ -596,12 +587,12 @@ public sealed class parent permits child, grandchile{
 }  
 ```  
   
-  
+
 ### Serialization  
 - it is converting of objects into byte stream so that it can be  
-- saved in a file  
-- transferred through a network  
-- It is done with the help of **==Serializable**== interface  
+	- saved in a file  
+	- transferred through a network  
+- It is done with the help of **==Serializable**== interface  (It is marker interface used to let the JVM know it is serializable)
 - Helps in storing the current state of an object and reuse it later  
 - ==**`transient`**== keyword is used on fields or variable that are not supposed to be serialized (security credentials, etc). so when deserialized are assigned to default values.
 ```java  
@@ -667,7 +658,7 @@ System.out.println("Suppressed: " + t);
 - This the resources are automatically closed at the end of try block.  
  - ==**NOTE**==  
 	- when the close method is not called on the resources created once its use is over.  
-	- and when the [[#Garbage Collector]]finds the object, it only frees the object memory, the resource will not be closed  
+	- and when the [[#Garbage Collector]] finds the object, it only frees the object memory, the resource will not be closed  
 	- thus when it repeats, then the limit of resource access exceed.  
 	- It can handle more than one object.
   
@@ -680,7 +671,7 @@ System.out.println("Suppressed: " + t);
   
 **Stack trace:** A _stack trace_ provides information on the execution history of the current thread and lists the names of the classes and methods that were called till the point when the exception occurred. A stack trace is a useful debugging tool that you'll normally take advantage of when an exception has been thrown.  
   
-### Creating Exception classes  
+### Creating custom Exception classes  
 - **Note** -- If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.  
 - Can be created by extending ==**`Exception`**== class  
   
@@ -690,13 +681,13 @@ System.out.println("Suppressed: " + t);
 - **Grouping error types**
   
 ### Overriding a method that throws an exception  
-- when parent doesn't throw an exception then the child cannot throw a checked exception but can be unchecked  
+- when parent method doesn't throw an exception then the child method cannot throw a checked exception but can be unchecked  
 - the child should not throw an exception that is superset of the parent class exception  
 - The first throws fewer exceptions than the overridden method, and the second, even though it throws more; they’re narrower in scope.  
 - parent and child can throw irrelevant exceptions  
   
 ### Note  
-- if a methods declared to throw a checked exception is called it should be handled inside a try-catch block or the function itself can be declared of throwing the same exception to avoid compile time interruption.  
+- if a methods declared to throw a checked exception is called it should be handled inside a try-catch block or the function itself can be declared of throwing the same exception to avoid compile time interruption.  but it is recommended to handle it.
   
   
   
@@ -844,11 +835,17 @@ list.add(4); // Safe to modify during iteration
 #### HashSet  
 - Does not maintain any order of the elements  
 - use hash table to store and access elements  
-- internally backed by **HashMap** 
+- internally backed by **HashMap** of key with single value
 
 #### LinkedHashSet  
 - maintains the insertion order  
 - uses hash function for storing and accessing  
+- the node consists of 
+	- key
+	- value
+	- previous node
+	- next node
+	- hash value
   
 #### TreeSet  
 - Stores elements in red-black tree  
@@ -964,11 +961,15 @@ difference.removeAll(s2);
 - use synchronized methods, but has performance overhead due to obtaining lock for the operations  
 - in-case of overriding **`hashCode()`**  do override **`equals()`** as well.
 - do not change the key after inserting.
+-  the node consists of 
+	- key
+	- value
+	- next node
+	- hash value
   
-### HashTable
-- Has very high similarity to hashmap
-- contains a array of bucket to store keyvalue pairs
-- does not allow null keys
+### Hashtable
+- contains a array of bucket to store key-value pairs
+- does not allow null keys, due to *legacy design* later to overcome this HashMap was introduced.
 - provides synchronization
 - uses `Enumerator` instead of `Iterator`
 - is now considered a legacy since it was brought in 1.2
@@ -1010,18 +1011,9 @@ TreeMap/TreeSet does not allow null value because it maintains certain ordering 
 |can remove elements from collection during iteration| 	can modify or remove elements when dealing with a copy of the collection |
 | high performance and low overhead | usually deal with large collection and support **parallelStream()** causing high overhead |  
 | better for simple iteration| better for complex iteration and manipulation process|
-  
-### Searching and Sorting in collections
-- there are two interfaces that help in creating a comparison method for collection. ==**`Comparable`**== and ==**`Comparator`**== 
-
-#### Comparable (interface)
-- helps implement **`compareTo`** method, used for sorting
-- only contains **`compareTo()`** 
-
-#### Comparator (functional interface)
-- helps define a custom **`compareTo`** methods, later used for sorting
-  
-  
+#### Iterator
+- It points between elements so it has `next()` that gives the next element in the sequence.
+ 
 #### Stream API
 - Recommended for java 8+ version due to its built-in parallel execution
  - used **`sorted`** method to sort collection when converted to a stream.
@@ -1032,6 +1024,17 @@ List<String> sortedFruits = fruits.stream()
         .sorted()
         .collect(Collectors.toList());
 ```  
+### Searching and Sorting in collections
+- there are two interfaces that help in creating a comparison method for collection. ==**`Comparable`**== and ==**`Comparator`**== 
+
+#### Comparable (interface)
+- helps implement **`compareTo`** method, used for sorting
+- only contains **`compareTo()`** 
+
+#### Comparator (functional interface)
+- helps define a custom **`compareTo`** methods, later used for sorting
+  
+ 
 #### Sorting maps
 - can be done with by converting them into list of map entries and sorting them.  
 
@@ -1392,12 +1395,12 @@ Extend the Thread class only in very specific, rare cases where you need to over
   
 #### Thread lifecycle and states  
   
-  **NEW,
-   RUNNABLE, 
-   BLOCKED,
-    WAITING, 
-    TIMED_WAITING, 
-    TERMINATED.**
+  NEW,
+  RUNNABLE, 
+  BLOCKED,
+  WAITING, 
+  TIMED_WAITING, 
+  TERMINATED.
     
 ![[Pasted image 20250926112146.png]]  
   
@@ -1702,7 +1705,7 @@ try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
 	- when the program starts the connection pool manager creates a predefined number of database connections and stores them in a memory-based architecture.
 - **Connection request and use**
 	- Request -> Borrowing -> Logical Close
-- ** Pool management**
+- **Pool management**
 	- Scaling -- on demand creates new connections 
 	- reaping -- connections that are idle beyond certain time are close to conserve resource.
 	- health check -- Constantly check on their status, and re-establish that are broken due to some reasons.
@@ -1720,4 +1723,146 @@ try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
 - Maintain minimum open connections
 - use batch processing -- using .addBatch() and executeBatch()
 - handle transaction properly -- using commit() and Rollback()
-- use Connection pooling
+- Use Connection pooling
+
+
+### Lambda Expression
+- **Lambda = Behavior**
+- To avoid complex implementation of anonymous class lambda expression id introduces.
+- Since anonymous class create separate java file for all of it.
+- So to deal it functionally and to pass code/logic as data lambda expression was introduced.
+- Lambda expressions are liked to a functional interface (Single Abstract Method)
+- It only captures effectively final variables.
+```java 
+Runnable r = () -> System.out.println("Hello");
+r.run();
+```
+
+```java
+import java.util.*;
+import java.util.function.*;
+
+@FunctionalInterface 
+interface Funcc{
+    public void printt();
+}
+
+public class FnInterface {
+    public static void main(String[] args) throws Exception {
+        Funcc obj=()-> System.out.println("adsf");
+        obj.printt();
+        List<Integer> nums=List.of(1,2,3,4,5);
+        checkprint(nums,i->System.err.println(i));
+    }   
+    public static void checkprint(List<Integer> nums,Consumer<Integer> cons){
+        for (int i:nums){
+            cons.accept(i);
+        }
+    }
+    
+}
+
+```
+
+
+
+
+  
+### Functional interface  
+- Functional Interfaces are mainly used for Lambda expressions, Method reference, and constructor references.  
+- In functional programming, code can be treated as data. For this purpose, Lambda expressions are introduced. They can be used to pass a block of code to another method or object. Functional Interface serves as a data type for Lambda expressions.  
+- Since a Functional interface contains only one abstract method, the implementation of that method becomes the code that gets passed as an argument to another method.  
+- Introduces to enable lambda function in interface  
+- Has only one abstract method irrespective of the other methods  
+	- **Consumer** -- when dealing width single argument  
+	- **Predicate** -- when dealing with Boolean value  
+	- **Supplier** -- Does not take argument but returns value  
+	- **Function** --when dealing with single argument and in need of return functionality  
+- __Created as an alternative for complex anonymous class__
+- advantages
+	- does not create `.class` file for every single usage.
+	- removes the overriding `this` for local instead of it being used on enclosing class
+
+```java 
+@FunctionalInterface
+interface Supplier{
+	public void give();
+}
+```
+
+
+### Stream API
+- Sequence of elements from a source.
+- Supports function-style operations
+- Not a data structure and does not store elements in any format.
+- Operation are executed only when terminal operation is invoked.
+- Types
+	- ParallelStream
+	- Sequential stream
+- Operations
+	- Intermediate --  return a new stream
+
+| Operation | Purpose | Example |
+|-|-|-|
+|`filter`| Keep elements matching a predicate|`stream.filter(x -> x > 10)`|
+|`map`| Transform elements|`stream.map(String::toUpperCase)`|
+|`flatMap`|Flatten nested structures|`stream.flatMap(List::stream)`|
+|`distinct`|Remove duplicates|`stream.distinct()`|
+|`sorted`|Sort elements|`stream.sorted()`|
+|`peek`|Debug / inspect elements|`stream.peek(System.out::println)`|
+|`limit`|Take first n elements|`stream.limit(5)`|
+|`skip`|Skip first n elements|`stream.skip(2)`|
+
+	- Terminal -- trigger evaluation
+
+| Operation   | Return Type               | Example                               |
+| ----------- | ------------------------- | ------------------------------------- |
+| `forEach`   | `void`                    | `stream.forEach(System.out::println)` |
+| `collect`   | Collection / Map / Custom | `stream.collect(Collectors.toList())` |
+| `reduce`    | Single value              | `stream.reduce(0, Integer::sum)`      |
+| `count`     | `long`                    | `stream.count()`                      |
+| `anyMatch`  | `boolean`                 | `stream.anyMatch(x -> x > 10)`        |
+| `allMatch`  | `boolean`                 | `stream.allMatch(x -> x > 0)`         |
+| `noneMatch` | `boolean`                 | `stream.noneMatch(x -> x < 0)`        |
+| `findFirst` | `Optional`                | `stream.findFirst()`                  |
+| `findAny`   | `Optional`                | `stream.findAny()`                    |
+
+
+### Optional Class
+- `Optional<T>` is a container object that may or may not contain a value of type `T`
+- Introduced to avoid null reference and `NullPointerExcaption`
+```java 
+Optional<String> emptyOpt = Optional.empty(); // empty container
+Optional<String> nonEmpty = Optional.of("Hello"); // value must be non-null
+Optional<String> nullable = Optional.ofNullable(null); // can be null
+
+
+optional.isPresent();  // true if value exists
+optional.isEmpty();    // true if no value
+
+String val = optional.get(); // throws NoSuchElementException if empty
+
+String val = optional.orElse("default");
+String val2 = optional.orElseGet(() -> "lazy default");
+String val3 = optional.orElseThrow(() -> new IllegalStateException("missing"));
+
+
+
+```
+- `of()` → throws `NullPointerException` if value is null
+- `ofNullable()` → allows null, returns empty optional if null
+- `empty()` → creates an empty Optional
+- `orElse(T other)` → return value if present, else `other`
+- `orElseGet(Supplier<? extends T> other)` → lazily compute default
+- `orElseThrow()` → throw exception if empty
+
+
+### Default and static methods in interface
+- Before java 8, interface allow abstract methods only, so adding method breaks all implementing classes.
+- `default` -- provides a default implementation of the method of the class
+	- can be overridden by implementing class/interface.
+- `static` -- does not depend on an instance. 
+
+### Logger
+- It is a tool to record runtime information about a program
+- It helps track application behavior , debug issues, monitor performance and audit events.
