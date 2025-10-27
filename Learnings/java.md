@@ -10,15 +10,15 @@
 - Backward compatibility is mostly intact  
 - most of the product or service were freely available  
   
-| Aspect | Before Java 11 (≤ Java 10) | After Java 11 |  
-| ------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |  
-| **Adoption** | Java 8 dominant (stable, LTS) | Enterprises slowly moved to Java 11 |  
-| **Release Cadence** | Old “every few years” releases | 6-month release cycle (LTS every 3 years) |  
-| **Features** | Streams, Lambdas, Modules (Java 9), `var` (Java 10) | HTTP/2 client, new APIs, `var` for lambdas, ZGC |  
-| **Ecosystem** | Java EE, CORBA, JavaFX still included | Removed legacy tech, leaner JDK |  
-| **Licensing** | Oracle JDK free | Oracle JDK requires subscription; OpenJDK & vendors fill the gap |  
-| **Stability** | Java 8 considered rock-solid | Java 11 became next enterprise LTS target |  
-| **Migration** | Smooth from 7 → 8, rough 8 → 9 | 8 → 11 migration required significant refactoring |  
+| Aspect              | Before Java 11 (≤ Java 10)                          | After Java 11                                                    |
+| ------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
+| **Adoption**        | Java 8 dominant (stable, LTS)                       | Enterprises slowly moved to Java 11                              |
+| **Release Cadence** | Old “every few years” releases                      | 6-month release cycle (LTS every 3 years)                        |
+| **Features**        | Streams, Lambdas, Modules (Java 9), `var` (Java 10) | HTTP/2 client, new APIs, `var` for lambdas, ZGC                  |
+| **Ecosystem**       | Java EE, CORBA, JavaFX still included               | Removed legacy tech, leaner JDK                                  |
+| **Licensing**       | Oracle JDK free                                     | Oracle JDK requires subscription; OpenJDK & vendors fill the gap |
+| **Stability**       | Java 8 considered rock-solid                        | Java 11 became next enterprise LTS target                        |
+| **Migration**       | Smooth from 7 → 8, rough 8 → 9                      | 8 → 11 migration required significant refactoring                |
   
 ### Features of java  
 - **Platform Independent**  
