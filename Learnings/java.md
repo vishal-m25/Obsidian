@@ -1,6 +1,6 @@
 
   
-- Java is always pass-by-value  
+- Java is always pass-by-value.
 - Always the type is checked during the compile time.
 
   
