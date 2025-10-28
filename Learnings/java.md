@@ -1120,7 +1120,7 @@ List<String> sortedFruits = fruits.stream()
 - [Data Streams](https://docs.oracle.com/javase/tutorial/essential/io/datastreams.html) handle binary I/O of primitive data type and `String` values.  
 - [Object Streams](https://docs.oracle.com/javase/tutorial/essential/io/objectstreams.html) handle binary I/O of objects.  
   
-  
+  For readers EndOfFile (EOF) is returned as **`-1`** for streams and **`null`** for readers
   
 ### Byte Stream  
 - Handle input and output of 8-bit bytes  
