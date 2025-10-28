@@ -49,4 +49,25 @@
 
 
 
-## 24th Oct
+## 27th Oct
+- ### Transform, indent in string
+	- was introduced in java 12
+- ### Ways to create object 
+	- Using new keyword
+	- Using clone() method
+	- Using Deserialization
+	- Using Constructor.newInstance() from Reflection API 
+	- Using ClassName.class.newInstance() // deprecated
+- ### Polymorphism relationship 
+	- is-a relationship (in terms of inheritance)
+	- has-a relationship (in terms of interface)
+- ### Can we create instance for interface
+	- no, it does not have a constructor
+- ### Runtime exceptions
+	- NullPointerException
+	- ArithmethicException
+	- ArrayIndexOutOfBoundException
+	- ClassCastException
+	- NumberFormatException
+- ### Exception package path
+	- ==**`java.lang`**== 

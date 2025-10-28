@@ -10,15 +10,15 @@
 - Backward compatibility is mostly intact  
 - most of the product or service were freely available  
   
-| Aspect              | Before Java 11 (≤ Java 10)                          | After Java 11                                                    |
-| ------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
-| **Adoption**        | Java 8 dominant (stable, LTS)                       | Enterprises slowly moved to Java 11                              |
-| **Release Cadence** | Old “every few years” releases                      | 6-month release cycle (LTS every 3 years)                        |
-| **Features**        | Streams, Lambdas, Modules (Java 9), `var` (Java 10) | HTTP/2 client, new APIs, `var` for lambdas, ZGC                  |
-| **Ecosystem**       | Java EE, CORBA, JavaFX still included               | Removed legacy tech, leaner JDK                                  |
-| **Licensing**       | Oracle JDK free                                     | Oracle JDK requires subscription; OpenJDK & vendors fill the gap |
-| **Stability**       | Java 8 considered rock-solid                        | Java 11 became next enterprise LTS target                        |
-| **Migration**       | Smooth from 7 → 8, rough 8 → 9                      | 8 → 11 migration required significant refactoring                |
+| Aspect | Before Java 11 (≤ Java 10) | After Java 11 |  
+| ------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |  
+| **Adoption** | Java 8 dominant (stable, LTS) | Enterprises slowly moved to Java 11 |  
+| **Release Cadence** | Old “every few years” releases | 6-month release cycle (LTS every 3 years) |  
+| **Features** | Streams, Lambdas, Modules (Java 9), `var` (Java 10) | HTTP/2 client, new APIs, `var` for lambdas, ZGC |  
+| **Ecosystem** | Java EE, CORBA, JavaFX still included | Removed legacy tech, leaner JDK |  
+| **Licensing** | Oracle JDK free | Oracle JDK requires subscription; OpenJDK & vendors fill the gap |  
+| **Stability** | Java 8 considered rock-solid | Java 11 became next enterprise LTS target |  
+| **Migration** | Smooth from 7 → 8, rough 8 → 9 | 8 → 11 migration required significant refactoring |  
   
 ### Features of java  
 - **Platform Independent**  
@@ -45,7 +45,7 @@
 - This is only to run, only used by the end users of the application  
 - works:  
 - loads the class file  
-- verify the bytecode for security  
+- Verify the bytecode for security  
 ### JVM (Java Virtual Machine)  
 - also known as interpreter  
 - uses JIT (just in time: converted from byte-code to machine code wile runtime) for faster execution  
@@ -371,7 +371,14 @@ break test;
 	- No-argument constructor  
 	- Copy constructor  
 	- Singleton constructor
-  
+
+### Inheritance
+- Types
+	- simple
+	- multiple 
+	- multi-level (achieved through interface)
+	- hierarchical
+	- hybrid
   
 ### Initialization block  
 - **Instance Initialization Block  
@@ -625,7 +632,7 @@ public class Main
   
 - All Error and Exception related classes are descendants of ==**`Throwable`**== class.
 - It is an exceptional event that occurs during the execution of the program that disrupts the flow of instructions.  
-- when an exceptional event occurs, the method creates an object called __exception__ and sends it to the runtime system.  
+- when an exceptional event occurs, the method creates an object called ==__exception__== and sends it to the runtime system.  
 - when an exception occurs, runtime searches the call stack(method invocations) sequentially to check for an matching exception handler, if matches, handles it and continues the program from that point, else the program is terminated.  
 - ==**Errors**== in specific are not recommended to be handled  
   
@@ -655,7 +662,7 @@ System.out.println("Suppressed: " + t);
 ### Try-with-resource  
 - Apart from having the try-catch-finally functionality, it has autocloseable resources created within parenthesis after `try` keyword  
 - Such resources should implement **AutoCloseable/Closeable**. interface  
-- This the resources are automatically closed at the end of try block.  
+- This way resources are automatically closed at the end of try block.  
  - ==**NOTE**==  
 	- when the close method is not called on the resources created once its use is over.  
 	- and when the [[#Garbage Collector]] finds the object, it only frees the object memory, the resource will not be closed  
@@ -687,12 +694,19 @@ System.out.println("Suppressed: " + t);
 - parent and child can throw irrelevant exceptions  
   
 ### Note  
-- if a methods declared to throw a checked exception is called it should be handled inside a try-catch block or the function itself can be declared of throwing the same exception to avoid compile time interruption.  but it is recommended to handle it.
+- When a methods declared to throw a checked exception is called it should be handled inside a try-catch block or the function itself can be declared of throwing the same exception to avoid compile time interruption.  But it is recommended to handle it.
   
+
+#### Best practices
+- Use specific catch block 
+- Try block should only contain code that might throw an error/exception.
+- Always use try-with-resource for resource closing.
+- Throw as exception, do not return error codes.
   
-  
-## Collections  
-- It inherits ==**`Iterable`**== class  
+## Collection
+	Introduced in 1.8, because earlier there were no consistent API for data structures available common for all the people who use java.
+	Everyone had their own data structure, so there is no common ground to share data.
+- It inherits ==**`Iterable`**== interface.  
 - ==**`Collection`**== is an interface.
 - ==**`Collections`**== is a Utility class
 
@@ -897,7 +911,16 @@ difference.removeAll(s2);
 	- binarySearch()  
 	- indexOfSublist()  
 	- lastIndexOfSublist()  
-  
+
+| Vector                                               | ArrayList                                                                          |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Synchronized                                         | Not                                                                                |
+| slower than arraylist in single threaded application | fast due to it not being not synchronized<br>faster in single threaded application |
+| when threshold exceeds the sizes is doubled          | when threshold exceeds the size increases by 50% of current size                   |
+
+ 
+
+
 ### Queue interface  
   
 | Type of Operation | Throws exception | Returns special value |  
@@ -906,7 +929,12 @@ difference.removeAll(s2);
 | Remove | `remove()` when no element to remove | `poll()` |  
 | Examine | `element()` when queue is empty | `peek()` |  
 - Queue itself does not allow null values , **but** queue implemented with LinkedList allows.  
-  
+
+
+### PriorityQueue
+- Uses **Tim sort** to maintain order.
+
+
 ### Dequeue interface  
 - It is a **double-ended queue**  
 - It supports insertion and deletion of elements on both the ends  
@@ -937,7 +965,10 @@ difference.removeAll(s2);
 	- entrySet  
 	- values  
   
-  
+### NavigableMap
+- Stores sorted key-value pairs
+- Better for searching nearby entries of a key.
+
 ### TreeSet vs HashSet  
   
 | Feature | HashSet (unordered) | TreeSet (sorted) |  
@@ -966,6 +997,7 @@ difference.removeAll(s2);
 	- value
 	- next node
 	- hash value
+- When the entries exceed 8 in each bin the linked list will be converted to TreeMap and when reduced it will be changed to linkedlist
   
 ### Hashtable
 - contains a array of bucket to store key-value pairs
@@ -1045,7 +1077,11 @@ List<String> sortedFruits = fruits.stream()
 	- Binary Search
 	- Methods from collections
 
-
+### Generics
+- Introduced to avoid ClassCastException
+- Types
+	- `<? extends T>`
+	- `<? super T>`
 
   
 ## I/O  
@@ -1725,7 +1761,7 @@ try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
 - handle transaction properly -- using commit() and Rollback()
 - Use Connection pooling
 
-
+## java 8 and Beyond
 ### Lambda Expression
 - **Lambda = Behavior**
 - To avoid complex implementation of anonymous class lambda expression id introduces.
@@ -1846,9 +1882,8 @@ String val = optional.orElse("default");
 String val2 = optional.orElseGet(() -> "lazy default");
 String val3 = optional.orElseThrow(() -> new IllegalStateException("missing"));
 
-
-
 ```
+
 - `of()` → throws `NullPointerException` if value is null
 - `ofNullable()` → allows null, returns empty optional if null
 - `empty()` → creates an empty Optional
@@ -1866,3 +1901,25 @@ String val3 = optional.orElseThrow(() -> new IllegalStateException("missing"));
 ### Logger
 - It is a tool to record runtime information about a program
 - It helps track application behavior , debug issues, monitor performance and audit events.
+- Frameworks
+	- `java.util.logging`
+	- SLF4J
+	- Logback
+- **Why not use `System.out.println()`?**
+	- always prints to console
+	- lacks level
+	- not thread-safe.
+	- not configurable
+- **Where to use loggers**
+	- error handling
+	- API request tracking
+	- record user actions for security
+	- performance monitoring
+- Logging levels
+	- TRACE
+	- DEBUG
+	- INFO
+	- WARN
+	- ERROR
+	
+

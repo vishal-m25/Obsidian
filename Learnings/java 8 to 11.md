@@ -69,7 +69,7 @@
 | **Empty check**         | `isEmpty()`                    | `isBlank()` (includes whitespace-only)                         |
 | **Repetition**          | Manual loop or `StringBuilder` | `repeat(int)`                                                  |
 | **Line splitting**      | `split("\n")` manually         | `lines()` returns Stream                                       |
-| **Transformation**      | No direct method               | `transform(Function)`                                          |
-| **Indentation**         | Manual string manipulation     | `indent(int)` built-in                                         |
-| **Memory efficiency**   | Higher (2 bytes per char)      | Compact and efficient (1 or 2 bytes)                           |
+| ==**Transformation**==      | ==No direct method==               | ==`transform(Function)`==                                          |
+| ==**Indentation**==         | ==Manual string manipulation==     | ==`indent(int)` built-in==                                         |
+| ==**Memory efficiency**==   | ==Higher (2 bytes per char)==      | ==Compact and efficient (1 or 2 bytes)==                           |
 
