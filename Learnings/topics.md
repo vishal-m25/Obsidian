@@ -57,7 +57,7 @@
 	- Using clone() method
 	- Using Deserialization
 	- Using Constructor.newInstance() from Reflection API 
-	- Using ClassName.class.newInstance() // deprecated
+	- Using ClassName.class.newInstance() // deprecated can only invoke no-argument constructor
 - ### Polymorphism relationship 
 	- is-a relationship (in terms of inheritance)
 	- has-a relationship (in terms of interface)

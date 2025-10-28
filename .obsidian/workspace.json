@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/java.md",
+                "file": "Learnings/java 8 to 11.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "java"
+              "title": "java 8 to 11"
             }
           },
           {
@@ -27,15 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/topics.md",
+                "file": "Learnings/java.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "topics"
+              "title": "java"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -195,7 +196,7 @@
       "switcher:Open quick switcher": false
     }
   },
-  "active": "0e8070657f17c139",
+  "active": "643f8b4441279412",
   "lastOpenFiles": [
     "Learnings/topics.md",
     "Learnings/java.md",

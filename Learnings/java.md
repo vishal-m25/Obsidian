@@ -729,21 +729,6 @@ System.out.println("Suppressed: " + t);
 	- implementations  
 	- algorithm  
   
-| Interface | Hash Table | Resizable Array | Balanced Tree | Linked List | Hash Table + Linked List |  
-| --------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |  
-| `Set` | [HashSet](https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html) | | [TreeSet](https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html) | | [LinkedHashSet](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashSet.html) |  
-| `List` | | [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) | | [LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) | |  
-| `Deque` | | [ArrayDeque](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html) | | [LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) | |  
-| `Map` | [HashMap](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html) | | [TreeMap](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html) | | [LinkedHashMap](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html) |  
-  
-| Interface | Allows Duplicates | Ordered | Sorted | Nulls Allowed |  
-| --------- | ----------------- | ------------------------- | ----------------------- | ---------------------------------------- |  
-| List | Yes | Yes | No | Yes (one null in some cases) |  
-| Set | No | No (except LinkedHashSet) | Yes (TreeSet) | Only one null (HashSet) |  
-| Queue | Yes | Yes | Priority-based possible | One null (except PriorityQueue) |  
-| sMap | No (for keys) | Depends | TreeMap sorted by keys | One null key (HashMap), many null values |  
-
-.
 
 | **Need / Requirement**                        | **Best Choice**            | **Reason**                                |
 | --------------------------------------------- | -------------------------- | ----------------------------------------- |
@@ -769,12 +754,16 @@ System.out.println("Suppressed: " + t);
 - **HashMap, HashSet, LinkedHashMap, LinkedHashSet, ConcurrentHashMap, WeakHashMap:** The default initial capacity is typically 16.  
 - **Hashtable:** The default initial capacity is 11.  
 - **LinkedList, TreeSet, TreeMap:** These classes do not have a concept of a fixed "capacity" in the same way as array-backed collections.  
+- **PriorityQueue**  --  11btes
+- **ArrayDequeue**  --  16 bytes
   
 ### Collection interface  
 - It is used to pass around group of objects where maximum generality is desired.  
   
 ### For iterations of collections  
 - Aggregate functions  
+- **==Iterators==**                  -- unidirectional , remove operation.
+- ==**`ListIterator`**==       -- bi-directional , all modification.
 - ==**`.stream()`**==  
 - ==**`.parallelStream()`**== can be used when the collection is big enough to make the computer struggle loading entirely  
   
@@ -826,7 +815,8 @@ System.out.println(iter.next());
 |Exception thrown|Yes|No|  
 - **Fail-safe iterator** , can also apply to a copy of the collection created in other ways  
 ```java  
-CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<>(Arrays.asList(1, 2, 3));  
+List<Integer> original=List.of(1,2,3,4,5);
+	CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<>(original);  
 Iterator<Integer> iterator = list.iterator();  
 while (iterator.hasNext()) {  
 Integer num = iterator.next();  
@@ -834,7 +824,13 @@ list.add(4); // Safe to modify during iteration
 }  
   
 ```  
-  
+
+### CopyOnWriteArrayList // CopyOnWriteArraySet
+- Similar to ArrayList has all functionalities
+- But in terms of thread safety, when a write operation is initiated
+	- a new copy of the entire list is taken
+	- write operation in done on new list.
+	- once completed replace the old list reference to the newly updated list 
   
   
 ### Set interface  
@@ -917,6 +913,8 @@ difference.removeAll(s2);
 | Synchronized                                         | Not                                                                                |
 | slower than arraylist in single threaded application | fast due to it not being not synchronized<br>faster in single threaded application |
 | when threshold exceeds the sizes is doubled          | when threshold exceeds the size increases by 50% of current size                   |
+| Not recommended to be used, rather outdated          | Preffered                                                                          |
+
 
  
 
@@ -983,12 +981,12 @@ difference.removeAll(s2);
   
 ### HashMap  
 - Collitions  
-	- handled by putting the same hashcode keys in a bucket and use **`equals`** to differentiate them  
+	- handled by putting the same hashcode keys in a bucket and uses **`equals()`** to differentiate them  
 - Load factor  
 	- states how full the hashmap can be before its size is increased.  
 - Not thread-safe  
 	- is not synchronized and can lead to racing conditions  
-- Hash-table is thread-safe  
+- **Hash-table is thread-safe**  
 - use synchronized methods, but has performance overhead due to obtaining lock for the operations  
 - in-case of overriding **`hashCode()`**  do override **`equals()`** as well.
 - do not change the key after inserting.
@@ -997,10 +995,9 @@ difference.removeAll(s2);
 	- value
 	- next node
 	- hash value
-- When the entries exceed 8 in each bin the linked list will be converted to TreeMap and when reduced it will be changed to linkedlist
-  
+- When the entries exceed 8 in any bin and the overall size over 64bytes then the linked list will be converted to Red-Black tree and when reduced it will be changed to linkedlist
 ### Hashtable
-- contains a array of bucket to store key-value pairs
+- contains an array of buckets(linkedlist) to store key-value pairs
 - does not allow null keys, due to *legacy design* later to overcome this HashMap was introduced.
 - provides synchronization
 - uses `Enumerator` instead of `Iterator`
@@ -1012,7 +1009,7 @@ difference.removeAll(s2);
 - HashMap for faster access
   
   
-TreeMap/TreeSet does not allow null value because it maintains certain ordering with the help of comparisons  
+TreeMap/TreeSet does not allow null value because it maintains certain ordering with the help of comparison 
   
   
 **Note** -- you are allowed to create your own immutable collection  
@@ -1045,6 +1042,21 @@ TreeMap/TreeSet does not allow null value because it maintains certain ordering 
 | better for simple iteration| better for complex iteration and manipulation process|
 #### Iterator
 - It points between elements so it has `next()` that gives the next element in the sequence.
+- Has 
+	- hasNext()
+	- nex()
+	- remove()
+- Does not allow modification during iteration throws concurrentodificationException
+
+### Enumerator
+- Widely used before java 1.2
+- Now a legacy code used only in 
+	- vector 
+	- hashtable
+- Has 
+	- hasMoreElements()
+	- nextElement()
+- Does not allow modification during iteration.
  
 #### Stream API
 - Recommended for java 8+ version due to its built-in parallel execution
@@ -1061,10 +1073,13 @@ List<String> sortedFruits = fruits.stream()
 
 #### Comparable (interface)
 - helps implement **`compareTo`** method, used for sorting
-- only contains **`compareTo()`** 
+- Only contains **`compareTo()`** 
+- Can be sorted only under the logic in ==**`compareTo`**==
+	- this function is generally used for sort operation
 
 #### Comparator (functional interface)
-- helps define a custom **`compareTo`** methods, later used for sorting
+- Helps define a custom **`compareTo`** methods, later used for sorting
+- Can use all the methods inside the comparator to sort.
   
  
 #### Sorting maps
@@ -1080,8 +1095,16 @@ List<String> sortedFruits = fruits.stream()
 ### Generics
 - Introduced to avoid ClassCastException
 - Types
-	- `<? extends T>`
-	- `<? super T>`
+	- `<? extends T>` to produce or work on it
+	- `<? super T>` to consume/store
+
+### Immutable collections
+- Initially ==**`Collections.unModifiableList(list)`**== and similarly for map and set can be used to create an immutable collection. (java 1.2)
+- But this such create a immutable view of the original collection, so whenever there is a change made in the original collection then it will be reflected in the view as well.
+- So they introduced factory methods ==**`.of()`**== in java 9.
+- Since that method needed to be initialized with elements as parameters, it became hard to create for an existing collection.
+- So ==**`copyOf()`**== method was introduced in java 10 which created a copy of the list as immutable and returned it.
+
 
   
 ## I/O  
