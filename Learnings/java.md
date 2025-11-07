@@ -1,4 +1,4 @@
-
+	
   
 - Java is always pass-by-value.
 - Always the type is checked during the compile time.
@@ -1234,8 +1234,8 @@ writer.close();
 ```  
   
   
-### Scanning  
--Uses CharBuffer implicitly
+### Scanner  
+- Uses CharBuffer implicitly
 - Objects of type Scanner are useful for breaking down formatted input into tokens and translating individual tokens according to their data type.  
 ```java  
 import java.io.*;  
