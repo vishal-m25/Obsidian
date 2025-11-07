@@ -1,0 +1,59 @@
+/*
+author: sailKite
+modified warm palette version
+*/
+
+/* updated snippet for v1.6.3  */
+
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder {
+  --nav-item-color: var(--folder-color);
+}
+
+
+
+/* warm gradient cycle (11-step loop) */
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 2) {
+  --folder-color: #ff6b6b; /* warm red */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 3) {
+  --folder-color: #ff8a5c; /* coral orange */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 4) {
+  --folder-color: #ffb36b; /* amber */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 5) {
+  --folder-color: #ffd47a; /* honey gold */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 6) {
+  --folder-color: #ffe8a3; /* cream */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 7) {
+  --folder-color: #fff0c8; /* pale warm sand */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 8) {
+  --folder-color: #ffe6b3; /* butter tan */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 9) {
+  --folder-color: #ffc98f; /* golden peach */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 10) {
+  --folder-color: #ffad7a; /* soft orange */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 11) {
+  --folder-color: #ff8f6b; /* coral sunset */
+}
+.nav-folder-children > .nav-folder,
+.nav-files-container > div > .nav-folder:nth-child(11n + 12) {
+  --folder-color: #ff7b5c; /* red-orange glow */
+}

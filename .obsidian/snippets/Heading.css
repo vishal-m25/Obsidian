@@ -1,0 +1,36 @@
+/* Apply gradient colors directly to headings */
+:is(h1,h2,h3,h4,h5,h6) {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+
+h1,
+.HyperMD-header-1:not(.cm-active) {
+  color: #ff4d4d;
+}
+
+h2,
+.HyperMD-header-2:not(.cm-active) {
+  color: #ff7a3d;
+}
+
+h3,
+.HyperMD-header-3:not(.cm-active) {
+  color: #ffb83d;
+}
+
+h4,
+.HyperMD-header-4:not(.cm-active) {
+  color: #ffd84d;
+}
+
+h5,
+.HyperMD-header-5:not(.cm-active) {
+  color: #fff07a;
+}
+
+h6,
+.HyperMD-header-6:not(.cm-active) {
+  color: #fff7c2;
+}

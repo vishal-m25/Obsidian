@@ -63,7 +63,7 @@
 	- has-a relationship (in terms of interface)
 - ### Can we create instance for interface
 	- no, it does not have a constructor
-- ### Runtime exceptions
+- ### Runtime exceptions 
 	- NullPointerException
 	- ArithmethicException
 	- ArrayIndexOutOfBoundException

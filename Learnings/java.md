@@ -1,10 +1,9 @@
-	
   
 - Java is always pass-by-value.
 - Always the type is checked during the compile time.
 
   
-### Advantages of java 8  
+## Advantages of java 8  
 - Introduced lambda function  
 - Introduced default and static methods in interfaces  
 - Backward compatibility is mostly intact  
@@ -20,7 +19,7 @@
 | **Stability** | Java 8 considered rock-solid | Java 11 became next enterprise LTS target |  
 | **Migration** | Smooth from 7 → 8, rough 8 → 9 | 8 → 11 migration required significant refactoring |  
   
-### Features of java  
+## Features of java  
 - **Platform Independent**  
 - **Object-Oriented**  
 - **Secure**  
@@ -36,7 +35,7 @@
 - access controller  
 - strong type checking  
   
-### JDK  
+## JDK  
 - It provides necessary tools and environment to develop java applications,  
 - includes JRE, and JVM  
   
@@ -629,6 +628,8 @@ public class Main
   
   
 ## Exception  
+^e0c5b7
+
   
 - All Error and Exception related classes are descendants of ==**`Throwable`**== class.
 - It is an exceptional event that occurs during the execution of the program that disrupts the flow of instructions.  
@@ -640,7 +641,7 @@ public class Main
 	- Compile time errors (checked during compile time)  
 - **Unchecked exception**  
 	- Errors  
-	- Run-time Exceptions  
+	- Run-time Exceptions
 - ==**NOTE**== - when try throws an exception and finally as well throws, then exception by try will be lost if the catch is not used.  
   
   
@@ -712,14 +713,14 @@ System.out.println("Suppressed: " + t);
 
 - the ==**Collection**== class has [_synchronization wrappers_](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#synchronizedCollection-java.util.Collection-) that can be used to synchronize any unsynchronized collections  
   
-| Key | Value |  
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |  
-| what | it is an object that represent a group of objects |  
-| purpose | used to store, retrieve, manipulate, and communicate aggregate data effieiency |  
-| Collection interface | `java.util.Collection` |  
-| Sub-interfaces | - list (ArrayList, LinkedList)<br>- set (HashSet,TreeSet)<br>- queue (PriorityQueue)<br>- deque (ArrayDeque) |  
-| Advantages | - Ready-made data structures<br>- Increased performance due to common interface<br>- Provides a common language for passing collection between different APIs. |  
-| Methods | The `Collection` interface contains methods that perform basic operations, such as **`int size()`**, **`boolean isEmpty()`**, **`boolean contains(Object element)`**, **`boolean add(E element)`**, <br>**`boolean remove(Object element)`**, and **`Iterator<E> iterator()`**.<br><br>**`boolean containsAll(Collection<?> c)`**, **`boolean addAll(Collection<? extends E> c)`**, **`boolean removeAll(Collection<?> c)`**, **`boolean retainAll(Collection<?> c)`**, and **`void clear()`**. |  
+| Key                  | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| what                 | it is an object that represent a group of objects                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| purpose              | used to store, retrieve, manipulate, and communicate aggregate data effieiency                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Collection interface | `java.util.Collection`                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Sub-interfaces       | - list (ArrayList, LinkedList)<br>- set (HashSet,TreeSet)<br>- queue (PriorityQueue)<br>- deque (ArrayDeque)                                                                                                                                                                                                                                                                                                                                                                                    |
+| Advantages           | - Ready-made data structures<br>- Increased performance due to common interface<br>- Provides a common language for passing collection between different APIs.                                                                                                                                                                                                                                                                                                                                  |
+| Methods              | The `Collection` interface contains methods that perform basic operations, such as **`int size()`**, **`boolean isEmpty()`**, **`boolean contains(Object element)`**, **`boolean add(E element)`**, <br>**`boolean remove(Object element)`**, and **`Iterator<E> iterator()`**.<br><br>**`boolean containsAll(Collection<?> c)`**, **`boolean addAll(Collection<? extends E> c)`**, **`boolean removeAll(Collection<?> c)`**, **`boolean retainAll(Collection<?> c)`**, and **`void clear()`**. |
   
 ### Collection Framework  
 - Unified architecture for representing and manipulating collections  
@@ -780,12 +781,13 @@ System.out.println(arl.stream().count());
 }  
 }  
 ```  
+
 - for-each loop  
 ```java  
 for (Object o : collection)  
 System.out.println(o);  
-  
 ```  
+
 - `Iterators`  
 ```java  
   
@@ -793,34 +795,35 @@ import java.util.ArrayList;
 import java.util.Iterator;  
   
 class Sample{  
-public static void main(String[] args) {  
-ArrayList<Integer> arl=new ArrayList<>();  
-arl.add(1);  
-arl.add(2);  
-Iterator<Integer> iter=arl.iterator();  
-while(iter.hasNext()){  
-System.out.println(iter.next());  
-  
-}  
-}  
+	public static void main(String[] args) {  
+		ArrayList<Integer> arl=new ArrayList<>();  
+		arl.add(1);  
+		arl.add(2);  
+		Iterator<Integer> iter=arl.iterator();  
+		
+		while(iter.hasNext()){  
+		System.out.println(iter.next());  
+		}  
+	}  
 }  
 ```  
 ### Fail fast and fail safe iterators  
-|Aspect|Fail-Fast Iterator|Fail-Safe Iterator|  
-|---|---|---|  
-|Behavior on concurrent modification|Throws `ConcurrentModificationException` immediately|Does not throw exception; iterates on a snapshot|  
-|Method of iteration|Iterates on the actual collection|Iterates on a clone/copy of the collection|  
-|Overhead|Low overhead (no copying)|Higher overhead due to copying|  
-|Use case|Single-threaded or controlled modification environments|Multi-threaded environments supporting concurrent modifications|  
-|Exception thrown|Yes|No|  
+| Aspect                              | Fail-Fast Iterator                                      | Fail-Safe Iterator                                              |     |
+| ----------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------- | --- |
+| Behavior on concurrent modification | Throws `ConcurrentModificationException` immediately    | Does not throw exception; iterates on a snapshot                |     |
+| Method of iteration                 | Iterates on the actual collection                       | Iterates on a clone/copy of the collection                      |     |
+| Overhead                            | Low overhead (no copying)                               | Higher overhead due to copying                                  |     |
+| Use case                            | Single-threaded or controlled modification environments | Multi-threaded environments supporting concurrent modifications |     |
+| Exception thrown                    | Yes                                                     | No                                                              |     |
 - **Fail-safe iterator** , can also apply to a copy of the collection created in other ways  
 ```java  
 List<Integer> original=List.of(1,2,3,4,5);
 	CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<>(original);  
 Iterator<Integer> iterator = list.iterator();  
+
 while (iterator.hasNext()) {  
-Integer num = iterator.next();  
-list.add(4); // Safe to modify during iteration  
+	Integer num = iterator.next();  
+	list.add(4); // Safe to modify during iteration  
 }  
   
 ```  
@@ -831,6 +834,7 @@ list.add(4); // Safe to modify during iteration
 	- a new copy of the entire list is taken
 	- write operation in done on new list.
 	- once completed replace the old list reference to the newly updated list 
+- During the write operation any number of read can be made. (write is not synchronized).
   
   
 ### Set interface  
@@ -839,13 +843,10 @@ list.add(4); // Safe to modify during iteration
 	- HashSet  
 	- TreeSet  
 	- LinkedHashSet  
-
-
-
 #### HashSet  
-- Does not maintain any order of the elements  
+- Does not maintain any order of the elements 
 - use hash table to store and access elements  
-- internally backed by **HashMap** of key with single value
+- Internally backed by **HashMap** of key and an empty Object (dummy object)
 
 #### LinkedHashSet  
 - maintains the insertion order  
@@ -921,16 +922,17 @@ difference.removeAll(s2);
 
 ### Queue interface  
   
-| Type of Operation | Throws exception | Returns special value |  
-| ----------------- | ------------------------------------ | --------------------- |  
-| Insert | `add(e)` on exceeding queue size | `offer(e)` |  
-| Remove | `remove()` when no element to remove | `poll()` |  
-| Examine | `element()` when queue is empty | `peek()` |  
+| Type of Operation | Throws exception                     | Returns special value |     |
+| ----------------- | ------------------------------------ | --------------------- | --- |
+| Insert            | `add(e)` on exceeding queue size     | `offer(e)`            |     |
+| Remove            | `remove()` when no element to remove | `poll()`              |     |
+| Examine           | `element()` when queue is empty      | `peek()`              |     |
 - Queue itself does not allow null values , **but** queue implemented with LinkedList allows.  
 
 
 ### PriorityQueue
-- Uses **Tim sort** to maintain order.
+- By default Uses **Tim sort** to maintain order.
+- Allows comparator in argument  to have custom ordering algorithm
 
 
 ### Dequeue interface  
@@ -969,15 +971,15 @@ difference.removeAll(s2);
 
 ### TreeSet vs HashSet  
   
-| Feature | HashSet (unordered) | TreeSet (sorted) |  
-| ----------------- | ------------------- | ---------------------------------------------- |  
-| Data structure | HashMap | TreeMap (Red-Black Tree) ordered BST |  
-| Ordering | None | Natural / Comparator |  
-| Nulls allowed | One null | No nulls |  
-| Time complexity | O(1) average | O(log n) |  
-| Duplicate allowed | No | No |  
-| Iteration order | Random | Sorted |  
-| Extra methods | Basic (add, remove) | Navigation methods (first, last, subset, etc.) |  
+| Feature           | HashSet (unordered) | TreeSet (sorted)                               |
+| ----------------- | ------------------- | ---------------------------------------------- |
+| Data structure    | HashMap             | TreeMap (Red-Black Tree) ordered BST           |
+| Ordering          | None                | Natural / Comparator                           |
+| Nulls allowed     | One null            | No nulls                                       |
+| Time complexity   | O(1) average        | O(log n)                                       |
+| Duplicate allowed | No                  | No                                             |
+| Iteration order   | Random              | Sorted                                         |
+| Extra methods     | Basic (add, remove) | Navigation methods (first, last, subset, etc.) |
   
 ### HashMap  
 - Collitions  
@@ -996,6 +998,7 @@ difference.removeAll(s2);
 	- next node
 	- hash value
 - When the entries exceed 8 in any bin and the overall size over 64bytes then the linked list will be converted to Red-Black tree and when reduced it will be changed to linkedlist
+- When a get operation is executed a binary AND of hashcode of the key and size of the bucket-array and then checks for hashcode equality.
 ### Hashtable
 - contains an array of buckets(linkedlist) to store key-value pairs
 - does not allow null keys, due to *legacy design* later to overcome this HashMap was introduced.
@@ -1019,11 +1022,6 @@ TreeMap/TreeSet does not allow null value because it maintains certain ordering 
 - it helps in having  
 	- read only collection  
 	- thread safe collection  
-  
-  
-  
-  
-  
 ### Cursor  
 - "cursors" are **objects used to iterate, or traverse, a collection's elements one by one** 
 - Types
@@ -1034,12 +1032,12 @@ TreeMap/TreeSet does not allow null value because it maintains certain ordering 
 
 ### Iterator and stream for collection  
 
-| Iterator | Stream |
-| - | - |
-| used when performing a complex iteration logic| for a functional approach in collections |
-|can remove elements from collection during iteration| 	can modify or remove elements when dealing with a copy of the collection |
-| high performance and low overhead | usually deal with large collection and support **parallelStream()** causing high overhead |  
-| better for simple iteration| better for complex iteration and manipulation process|
+| Iterator                                             | Stream                                                                                    |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| used when performing a complex iteration logic       | for a functional approach in collections                                                  |
+| can remove elements from collection during iteration | can modify or remove elements when dealing with a copy of the collection                  |
+| high performance and low overhead                    | usually deal with large collection and support **parallelStream()** causing high overhead |
+| better for simple iteration                          | better for complex iteration and manipulation process                                     |
 #### Iterator
 - It points between elements so it has `next()` that gives the next element in the sequence.
 - Has 
@@ -1095,8 +1093,8 @@ List<String> sortedFruits = fruits.stream()
 ### Generics
 - Introduced to avoid ClassCastException
 - Types
-	- `<? extends T>` to produce or work on it
-	- `<? super T>` to consume/store
+	- `<? extends T>` to produce or work on it (will not allow parent of T)
+	- `<? super T>` to consume/store (stored as Object class)
 
 ### Immutable collections
 - Initially ==**`Collections.unModifiableList(list)`**== and similarly for map and set can be used to create an immutable collection. (java 1.2)
@@ -1300,11 +1298,11 @@ System.out.println(i);
   
 ### Data Streams  
   
-| Data type | Output Method | Input Method | Sample Value |  
-| --------- | ------------------------------ | ---------------------------- | ---------------- |  
-| `double` | `DataOutputStream.writeDouble` | `DataInputStream.readDouble` | `19.99` |  
-| `int` | `DataOutputStream.writeInt` | `DataInputStream.readInt` | `12` |  
-| `String` | `DataOutputStream.writeUTF` | `DataInputStream.readUTF` | `"Java T-Shirt"` |  
+| Data type | Output Method                  | Input Method                 | Sample Value     |
+| --------- | ------------------------------ | ---------------------------- | ---------------- |
+| `double`  | `DataOutputStream.writeDouble` | `DataInputStream.readDouble` | `19.99`          |
+| `int`     | `DataOutputStream.writeInt`    | `DataInputStream.readInt`    | `12`             |
+| `String`  | `DataOutputStream.writeUTF`    | `DataInputStream.readUTF`    | `"Java T-Shirt"` |
   
 ```java  
 class Hostel{  

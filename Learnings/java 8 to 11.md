@@ -83,7 +83,7 @@ how the framework is designed, how each interface connects, and what implementat
 
 ---
 
-# 🧩 **Java Collections Framework (JCF) — Complete Architecture**
+# 🧩 Java Collections Framework (JCF) — Complete Architecture
 
 ## 🏗️ 2️⃣ High-Level Structure
 
