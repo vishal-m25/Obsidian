@@ -112,7 +112,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "32dd3975d31bf67f",
@@ -215,7 +216,7 @@
       "switcher:Open quick switcher": false
     }
   },
-  "active": "81bec6e31916f035",
+  "active": "643f8b4441279412",
   "lastOpenFiles": [
     "Learnings/java",
     "Learnings/java/Topics.md",

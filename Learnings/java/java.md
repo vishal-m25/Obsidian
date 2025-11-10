@@ -1448,7 +1448,14 @@ This is the recommended and preferred approach for most scenarios where you only
 - **Use Thread:**  
 Extend the Thread class only in very specific, rare cases where you need to override or specialize other behaviors of the Thread class itself, such as the `interrupt()` method, in addition to the `run()` method.  
   
-  
+
+### Thread
+- Has a size of 1MB
+- Physical count in  a system is number of processor cores.
+- Logical count is twice the number of cores
+- Each 1MB in the main memory can be used to create a new thread.
+- A core can run only one thread in an instant.
+
 #### Thread lifecycle and states  
   
   NEW,
@@ -1469,7 +1476,30 @@ Extend the Thread class only in very specific, rare cases where you need to over
 - It helps in ensuring integrity among the threads.  
 - ==**constructors**== cannot be declared as synchronized.  
   
-  
+#### Liveness
+- Refer to the ability of a concurrent application to make progress toward completion.
+
+#### Thread Contention
+- Occurs when two or more threads simultaneously try to access a resource that can only be used by one thread at a time. Results in delaying the execution.
+#### Deadlock
+- A set of threads are all permanently blocked m waiting for a resource that another thread in the dame set holds. 
+	- A cyclic dependency is created and waits indefinitely.
+#### Starvation
+- When a thread is continuously denied access to a shared resource, even though the resource is frequently available.
+	- it is due to unfair scheduling policies or high priority threads always seizing the resource before low-priority thread gets a chance.
+
+#### Livelock
+- Also known as polite deadlock
+- Two threads busy and active but stuck in a repeated cycle of responding to each other's actions.
+- One captures the lock and sees the other searching for the lock and provides the lock and other thread does the same.
+- Now progress is made in the mean time.
+
+#### Race Condition
+- A programming flaw where the result of the program is dependent on sequence or timing of uncontrollable events (unknown and undefinable thread execution order).
+
+#### Throughput
+- Number of tasks a computer can complete in a given amount of time.
+
 ### Intrinsic lock  
 - Synchronization is built around an internal entity known as ==**intrinsic/monitor locks**==.  
 - when a ==**static synchronized method is invoked**==, since a static method is associated with a class, not an object. In this case, the thread acquires the intrinsic lock for the ==**`Class`**== object associated with the class. Thus access to class's static fields is controlled by a lock that's distinct from the lock for any instance of the class.  
@@ -1477,7 +1507,18 @@ Extend the Thread class only in very specific, rare cases where you need to over
 #### Reentrant Synchronization  
   
 - Recall that a thread cannot acquire a lock owned by another thread. But a thread _can_ acquire a lock that it already owns. Allowing a thread to acquire the same lock more than once enables _reentrant synchronization_. This describes a situation where synchronized code, directly or indirectly, invokes a method that also contains synchronized code, and both sets of code use the same lock. Without reentrant synchronization, synchronized code would have to take many additional precautions to avoid having a thread cause itself to block.  
-  
+
+
+### Atomic
+- Introduced in java 5
+- Contains 
+	- AtomicInteger
+	- AtmoicLong
+	- AtomicReference, etc...
+- It helps in making a sequence of more than one instruction as one instruction so the CPU completes without interruption.
+- No context switch will occur until the instruction is finished.
+- Operations like **Test-and-set** and **Compare-and-swap**  are considered as single instruction
+
 ### Synchronized statement  
   
 ```java  
@@ -1519,7 +1560,8 @@ c2++;
 - To efficiently use thread and maintain thread pools instead of creating new threads for every single time.
 - __Thread Pool__ consists of number of worker nodes that can be assigned with tasks.
 - __Task queue__ It consists of tasks given to the executor.
-- there are different structure of executor that can be created;
+- There are different structure of executor that can be created;
+	- all the below create new threads so it does not terminate automatically it waits until explicitly said to;
 	- **newFixedThreadPool()** -- to allow a certain number of threads execute parallelly
 	- **newSingleThreadExecutor()** -- to have single thread execute all the tasks sequentially
 	- **newCachedThreadPool()** -- variable number of threads are created according to the need and availability, when available uses previously constructed thread, else creates a new thread
@@ -1633,7 +1675,7 @@ public class MultiResourceJDBC {
 ```
 
 ### PreparedStatement
-- it is a precompiled statement that uses **?** to later set values and execute with less computation compared to statement itself.
+- It is a precompiled statement that uses **?** to later set values and execute with less computation compared to new statement. 
 - it is precompiled by the database itself.
 - It prevents SQL Injection
 - Supports bulk execution
