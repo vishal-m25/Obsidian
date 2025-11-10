@@ -629,8 +629,6 @@ public class Main
   
 ## Exception  
 ^e0c5b7
-
-  
 - All Error and Exception related classes are descendants of ==**`Throwable`**== class.
 - It is an exceptional event that occurs during the execution of the program that disrupts the flow of instructions.  
 - when an exceptional event occurs, the method creates an object called ==__exception__== and sends it to the runtime system.  
@@ -755,7 +753,7 @@ System.out.println("Suppressed: " + t);
 - **HashMap, HashSet, LinkedHashMap, LinkedHashSet, ConcurrentHashMap, WeakHashMap:** The default initial capacity is typically 16.  
 - **Hashtable:** The default initial capacity is 11.  
 - **LinkedList, TreeSet, TreeMap:** These classes do not have a concept of a fixed "capacity" in the same way as array-backed collections.  
-- **PriorityQueue**  --  11btes
+- **PriorityQueue**  --  11ybtes
 - **ArrayDequeue**  --  16 bytes
   
 ### Collection interface  
@@ -766,7 +764,7 @@ System.out.println("Suppressed: " + t);
 - **==Iterators==**                  -- unidirectional , remove operation.
 - ==**`ListIterator`**==       -- bi-directional , all modification.
 - ==**`.stream()`**==  
-- ==**`.parallelStream()`**== can be used when the collection is big enough to make the computer struggle loading entirely  
+- ==**`.parallelStream()`**== can be used when the collection is big enough to make the computer struggle loading entirely  in main memory
   
 ```java  
 import java.util.ArrayList;  
@@ -1193,7 +1191,7 @@ String s[]=new String[]{"this is s sample output\n"," and this is next line"};
 for(String sh:s){  
 write.println(sh);  
 }  
-write.flush(); //to flush the content into the file, can be used if it takes time ti close the write  
+write.flush(); //to flush the content into the file, can be used if it takes time ti close the writer
 read.close();  
 write.close();  
 }  
@@ -1202,8 +1200,9 @@ write.close();
   
   
 ### Buffered streams  
+- Uses Character array buffer
 - Normally , the file is read -> decoded(UTF-8) (By Reader) -> Stored in buffer -> Accessed by the program.
-- Buffered input streams read data from a memory area known as a _buffer_ (8KB) , the native input API is called only when the buffer is empty.  
+- Buffered input streams read data to and from a memory area known as a _buffer_ (8KB) , the native input API is called only when the buffer is empty.  
 - buffered output streams write data to a buffer, and the native output API is called only when the buffer is full.  
 - so to call the write API before the buffer is full we use ==**`.flush()`**== to immediately call the API and write in the file.  
   
@@ -1348,7 +1347,7 @@ out.close();
   
 **Serialization** is a mechanism of converting the state of an object into a byte stream.  
   
-**Important Points of Serialisation:**  
+**Important Points of Serialization:**  
   
 - **Platform-Independent:** In Java, the serialization is a platform-independent process. It means that if we serialize an object using a byte stream on one platform can be easily deserialized on different platforms.  
 - **Serializable Interface:** If we want to make a class serializable, then it must implement the Serializable interface. This interface does not contain any methods or variables ( marker interface), but it gives a signal that the class is ready for serialization.  
@@ -1438,7 +1437,7 @@ System.out.println("ClassNotFoundException is caught");
 	- implementing ==**`Runnable`**== interface. has only  run() in it.
 	- extending ==**`Thread`**== class  
 	- creating anonymous class of ==**`Thread`**==  
-- The Main class thread can be accessed with the help of ==**`Thread.currentThread()`**==  
+- Current running thread can be accessed with the help of ==**`Thread.currentThread()`**==  
 
 - **NOTE** --- Thread group is used to group created threads so that the operation can be commonly applied to all the threads in it.
   
