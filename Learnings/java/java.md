@@ -1,6 +1,6 @@
   
 - Java is always pass-by-value.
-- Always the type is checked during the compile time.
+- Always the type is checked during the compile time. 
 
   
 ## Advantages of java 8  
@@ -703,7 +703,7 @@ System.out.println("Suppressed: " + t);
 - Throw as exception, do not return error codes.
   
 ## Collection
-	Introduced in 1.8, because earlier there were no consistent API for data structures available common for all the people who use java.
+	Introduced in 1.8, because earlier there were no consistent API for data structures available in common for all the people who use java.
 	Everyone had their own data structure, so there is no common ground to share data.
 - It inherits ==**`Iterable`**== interface.  
 - ==**`Collection`**== is an interface.
@@ -722,7 +722,7 @@ System.out.println("Suppressed: " + t);
   
 ### Collection Framework  
 - Unified architecture for representing and manipulating collections  
-- **final** keyword on list object will only stop it from reassigning not from appending  
+- **final** keyword on list object will only stop it from reassigning not from manipulating
 - contains  
 	- Interface  
 	- implementations  
@@ -759,8 +759,9 @@ System.out.println("Suppressed: " + t);
 ### Collection interface  
 - It is used to pass around group of objects where maximum generality is desired.  
   
-### For iterations of collections  
+### Iterations of collections  
 - Aggregate functions  
+- ==**foreach**== statement
 - **==Iterators==**                  -- unidirectional , remove operation.
 - ==**`ListIterator`**==       -- bi-directional , all modification.
 - ==**`.stream()`**==  
@@ -962,6 +963,12 @@ difference.removeAll(s2);
 	- keySet  
 	- entrySet  
 	- values  
+
+| synchronizedMap                                                               | ConcurrentHashMap                                                                                     |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Wraps the map with synchronized methods that lock the map for every operation | creates lock for each bucket, so multiple thread can work on same map without interfering one another |
+| it is a fail-fast iterator                                                    | does not throw ConcurrentModificationException                                                        |
+| Allows null keys                                                              | does not allow null keys, throws NullPointerException                                                 |
   
 ### NavigableMap
 - Stores sorted key-value pairs
@@ -980,10 +987,10 @@ difference.removeAll(s2);
 | Extra methods     | Basic (add, remove) | Navigation methods (first, last, subset, etc.) |
   
 ### HashMap  
-- Collitions  
+- Collisions  
 	- handled by putting the same hashcode keys in a bucket and uses **`equals()`** to differentiate them  
 - Load factor  
-	- states how full the hashmap can be before its size is increased.  
+	- states how full the HashMap can be before its size is increased.  
 - Not thread-safe  
 	- is not synchronized and can lead to racing conditions  
 - **Hash-table is thread-safe**  
@@ -1037,12 +1044,12 @@ TreeMap/TreeSet does not allow null value because it maintains certain ordering 
 | high performance and low overhead                    | usually deal with large collection and support **parallelStream()** causing high overhead |
 | better for simple iteration                          | better for complex iteration and manipulation process                                     |
 #### Iterator
-- It points between elements so it has `next()` that gives the next element in the sequence.
+- It ==points between elements== so it has `next()` that gives the next element in the sequence.
 - Has 
 	- hasNext()
 	- nex()
 	- remove()
-- Does not allow modification during iteration throws concurrentodificationException
+- Does not allow modification during iteration throws ==ConcurrentModificationException==
 
 ### Enumerator
 - Widely used before java 1.2
@@ -1056,7 +1063,7 @@ TreeMap/TreeSet does not allow null value because it maintains certain ordering 
  
 #### Stream API
 - Recommended for java 8+ version due to its built-in parallel execution
- - used **`sorted`** method to sort collection when converted to a stream.
+ - uses **`sorted()`** method to sort collection when converted to a stream.
 ```java
 List<String> fruits = Arrays.asList("banana", "apple", "orange", "grape");
  
@@ -1068,10 +1075,10 @@ List<String> sortedFruits = fruits.stream()
 - there are two interfaces that help in creating a comparison method for collection. ==**`Comparable`**== and ==**`Comparator`**== 
 
 #### Comparable (interface)
-- helps implement **`compareTo`** method, used for sorting
+- Helps implement **`compareTo`** method
 - Only contains **`compareTo()`** 
 - Can be sorted only under the logic in ==**`compareTo`**==
-	- this function is generally used for sort operation
+	- this function is generally used for sort operation like Arrays.sort(), Collections.sort().
 
 #### Comparator (functional interface)
 - Helps define a custom **`compareTo`** methods, later used for sorting
@@ -1693,7 +1700,6 @@ ResultSet rs = ps.executeQuery();
 - this interface is used to call stored procedures in the database itself.
 in SQL
 - Allows IN, OUT, INOUT parameters.
-- 
 
 ```sql
 DELIMITER //
@@ -1799,7 +1805,7 @@ try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
 
 ### Connection Pooling 
 - It is a technique used to reuse database connections instead of repeatedly establishing new one.
-- **Initailization**
+- **Initialization**
 	- when the program starts the connection pool manager creates a predefined number of database connections and stores them in a memory-based architecture.
 - **Connection request and use**
 	- Request -> Borrowing -> Logical Close
@@ -1815,7 +1821,7 @@ try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
 
 
 ### Best practices
-- Always use prepared statements
+- Always use prepared statements over statements
 - use try-with-resource
 - avoid hard-coding credentials
 - Maintain minimum open connections
@@ -1825,9 +1831,9 @@ try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
 
 ## java 8 and Beyond
 ### Lambda Expression
-- **Lambda = Behavior**
-- To avoid complex implementation of anonymous class lambda expression id introduces.
-- Since anonymous class create separate java file for all of it.
+- **Lambda === Behavior**
+- To avoid complex implementation of anonymous class lambda expression was introduced.
+- Since anonymous class creates a separate java file for each one .
 - So to deal it functionally and to pass code/logic as data lambda expression was introduced.
 - Lambda expressions are liked to a functional interface (Single Abstract Method)
 - It only captures effectively final variables.
@@ -1866,16 +1872,16 @@ public class FnInterface {
 
 
   
-### Functional interface  
+### Functional interface
 - Functional Interfaces are mainly used for Lambda expressions, Method reference, and constructor references.  
 - In functional programming, code can be treated as data. For this purpose, Lambda expressions are introduced. They can be used to pass a block of code to another method or object. Functional Interface serves as a data type for Lambda expressions.  
 - Since a Functional interface contains only one abstract method, the implementation of that method becomes the code that gets passed as an argument to another method.  
 - Introduces to enable lambda function in interface  
 - Has only one abstract method irrespective of the other methods  
-	- **Consumer** -- when dealing width single argument  
-	- **Predicate** -- when dealing with Boolean value  
-	- **Supplier** -- Does not take argument but returns value  
-	- **Function** --when dealing with single argument and in need of return functionality  
+	- **Consumer** -- when dealing width single argument         -- **`accept()`**
+	- **Predicate** -- when dealing with Boolean value                --  **`test()`**
+	- **Supplier** -- Does not take argument but returns value   --  **`get()`**
+	- **Function** --when dealing with single argument and in need of return functionality   -- **`apply()`**
 - __Created as an alternative for complex anonymous class__
 - advantages
 	- does not create `.class` file for every single usage.
@@ -1977,7 +1983,7 @@ String val3 = optional.orElseThrow(() -> new IllegalStateException("missing"));
 	- API request tracking
 	- record user actions for security
 	- performance monitoring
-- Logging levels
+- **Logging levels**
 	- TRACE
 	- DEBUG
 	- INFO

@@ -10,49 +10,15 @@
           {
             "id": "643f8b4441279412",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/java/java.md",
+                "file": "Learnings/Servlet/Servlet.md",
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "java"
-            }
-          },
-          {
-            "id": "0e8070657f17c139",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Learnings/java 8 to 11.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "java 8 to 11"
-            }
-          },
-          {
-            "id": "fe3a0f4a36723445",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Learnings/Topics.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Topics"
+              "title": "Servlet"
             }
           }
         ]
@@ -129,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Learnings/java.md",
+                "file": "Learnings/Servlet/Servlet.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +105,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for java"
+              "title": "Backlinks for Servlet"
             }
           },
           {
@@ -216,11 +182,16 @@
       "switcher:Open quick switcher": false
     }
   },
-  "active": "643f8b4441279412",
+  "active": "c46a163937979a46",
   "lastOpenFiles": [
+    "Untitled 1.md",
+    "Learnings/Servlet/Servlet.md",
+    "Untitled.md",
+    "Learnings/Servlet/General.md",
+    "Learnings/java/java.md",
+    "Learnings/Servlet",
     "Learnings/java",
     "Learnings/java/Topics.md",
-    "Learnings/java/java.md",
     "Learnings/java/java 8 to 11.md",
     "Untitled.base",
     "2025-11-07.md",
@@ -257,7 +228,6 @@
     "Learnings",
     "clg/Aptitude formulas.md",
     "clg/Angular.md",
-    "OOPs",
-    "cars.md"
+    "OOPs"
   ]
 }
