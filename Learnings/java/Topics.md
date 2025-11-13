@@ -78,17 +78,17 @@
 
 ## 11th Nov
 
--  HashSet with different key types
+- ### HashSet with different key types
 	- no type safety
 	- inconsistent equality, the ==**`hashCode()`**== and ==**`equals()`**== differ for each type of key used
-- Custom comparator in TreeSet
+- ### Custom comparator in TreeSet
 	- by default uses the ==**compareTo()**==  in the key class
-- Sort HashMap with values
+- ### Sort HashMap with values
 	- it can be done by inserting all the values in a list and sorting it with default or custom comparator
-- Methods in collection interfaces
-- IllegalArgumentException cause
+- ### Methods in collection interfaces
+- ### IllegalArgumentException cause
 	- Raised by methods on passing arguments that does not satisfy specific conditions of the method
-- How LinkedHashMap works
+- ### How LinkedHashMap works
 	- The Entry class has 4 members (extends Node form HashMap which implements Entry from Map)
 		- hashcode
 		- key
