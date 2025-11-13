@@ -864,14 +864,14 @@ while (iterator.hasNext()) {
 
 #### Operations  
 - basic  
-- size()  
-- isEmpty()  
-- Iterator  
+	- size()  
+	- isEmpty()  
+	- Iterator  
 - bulk  
-- containsAll()  
-- retainAll()  
-- addAll()  
-- removeAll()  
+	- containsAll()  
+	- retainAll()  
+	- addAll()  
+	- removeAll()  
 ```java  
 Set<Type> union = new HashSet<Type>(s1);  
 union.addAll(s2);  
@@ -1003,7 +1003,7 @@ difference.removeAll(s2);
 	- next node
 	- hash value
 - When the entries exceed 8 in any bin and the overall size over 64bytes then the linked list will be converted to Red-Black tree and when reduced it will be changed to linkedlist
-- When a get operation is executed a binary AND of hashcode of the key and size of the bucket-array and then checks for hashcode equality.
+- When a get operation is executed a binary AND of hashcode of the key and size of the bucket-array and then checks for hashcode equality to find the location of the key.
 ### Hashtable
 - contains an array of buckets(linkedlist) to store key-value pairs
 - does not allow null keys, due to *legacy design* later to overcome this HashMap was introduced.
@@ -1103,7 +1103,7 @@ List<String> sortedFruits = fruits.stream()
 
 ### Immutable collections
 - Initially ==**`Collections.unModifiableList(list)`**== and similarly for map and set can be used to create an immutable collection. (java 1.2)
-- But this such create a immutable view of the original collection, so whenever there is a change made in the original collection then it will be reflected in the view as well.
+- But this creates an immutable view of the original collection, so whenever there is a change made in the original collection then it will be reflected in the view as well.
 - So they introduced factory methods ==**`.of()`**== in java 9.
 - Since that method needed to be initialized with elements as parameters, it became hard to create for an existing collection.
 - So ==**`copyOf()`**== method was introduced in java 10 which created a copy of the list as immutable and returned it.
@@ -1525,7 +1525,7 @@ Extend the Thread class only in very specific, rare cases where you need to over
 - It helps in making a sequence of more than one instruction as one instruction so the CPU completes without interruption.
 - No context switch will occur until the instruction is finished.
 - Operations like **Test-and-set** and **Compare-and-swap**  are considered as single instruction
-
+- It uses ==**lock-free**==, non-blocking operation provided by CPU itself
 ### Synchronized statement  
   
 ```java  

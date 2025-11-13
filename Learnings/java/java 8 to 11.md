@@ -76,12 +76,6 @@
 
 
 ## Collections
-Excellent — you’re now asking for the **complete architecture** of the **Java Collections Framework (JCF)**, one of the most powerful parts of the Java platform.
-
-Let’s build this in a **layered, structured, and visual** way so you fully understand:
-how the framework is designed, how each interface connects, and what implementations belong where.
-
----
 
 # 🧩 Java Collections Framework (JCF) — Complete Architecture
 
