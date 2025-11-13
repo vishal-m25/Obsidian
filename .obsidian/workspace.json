@@ -29,40 +29,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/java/java 8 to 11.md",
+                "file": "Learnings/java/java.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "java 8 to 11"
-            }
-          },
-          {
-            "id": "742cfad28e337cdb",
-            "type": "leaf",
-            "state": {
-              "type": "split-diff-view",
-              "state": {
-                "aFile": ".gitignore",
-                "bFile": ".gitignore",
-                "aRef": ""
-              },
-              "icon": "diff",
-              "title": "Diff: .gitignore"
-            }
-          },
-          {
-            "id": "94e7ab1f6d3ce24d",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "title": "java"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -222,12 +198,12 @@
       "switcher:Open quick switcher": false
     }
   },
-  "active": "742cfad28e337cdb",
+  "active": "643f8b4441279412",
   "lastOpenFiles": [
     "Learnings/java/Topics.md",
-    "personal/Configurations.md",
     "Learnings/java/java.md",
     "Learnings/java/java 8 to 11.md",
+    "personal/Configurations.md",
     "Learnings/Servlet/Servlet.md",
     "Untitled 1.md",
     "Untitled.md",

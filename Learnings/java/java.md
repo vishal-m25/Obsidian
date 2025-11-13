@@ -848,8 +848,8 @@ while (iterator.hasNext()) {
 - Internally backed by **HashMap** of key and an empty Object (dummy object)
 
 #### LinkedHashSet  
-- maintains the insertion order  
-- uses hash function for storing and accessing  
+- Maintains the insertion order 
+- LinkedHashMap is used under the hood  
 - the node consists of 
 	- key
 	- value
@@ -1005,6 +1005,7 @@ difference.removeAll(s2);
 - When the entries exceed 8 in any bin and the overall size over 64bytes then the linked list will be converted to Red-Black tree and when reduced it will be changed to linkedlist
 - When a get operation is executed a binary AND of hashcode of the key and size of the bucket-array and then checks for hashcode equality to find the location of the key.
 ### Hashtable
+- It extends dictionary class
 - contains an array of buckets(linkedlist) to store key-value pairs
 - does not allow null keys, due to *legacy design* later to overcome this HashMap was introduced.
 - provides synchronization
@@ -1015,6 +1016,7 @@ difference.removeAll(s2);
 - Has features of both hash table and doubly-LinkedList  
 - LinkedList for preserving the insertion order/ access order
 - HashMap for faster access
+- It follows the same method of hashmap of array of bins but the entry inside has an extra members that points to the next entry in the insertion order
   
   
 TreeMap/TreeSet does not allow null value because it maintains certain ordering with the help of comparison 

@@ -94,3 +94,6 @@
 		- key
 		- value
 		- next entry memory address
+- ### Properties
+	- used to store key value pairs where both are string class
+	- but allows any type (casts as object by default), but cannot be saved to a file due implicit casting to string.
