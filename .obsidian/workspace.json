@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/java/java.md",
+                "file": "Learnings/java/Topics.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "java"
+              "title": "Topics"
             }
           }
         ],
@@ -95,7 +95,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "32dd3975d31bf67f",
@@ -200,8 +201,8 @@
   },
   "active": "643f8b4441279412",
   "lastOpenFiles": [
-    "Learnings/java/Topics.md",
     "Learnings/java/java.md",
+    "Learnings/java/Topics.md",
     "Learnings/java/java 8 to 11.md",
     "personal/Configurations.md",
     "Learnings/Servlet/Servlet.md",

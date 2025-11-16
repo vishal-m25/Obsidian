@@ -97,3 +97,20 @@
 - ### Properties
 	- used to store key value pairs where both are string class
 	- but allows any type (casts as object by default), but cannot be saved to a file due implicit casting to string.
+
+
+## 14th November
+
+- Methods in TreeMap (newer methods in java 8 to 11) 
+- BufferedReader / Writer vs other FileReader/Writer
+- Read System properties with properties
+- Get properties from command line and env files
+- Cause of InterruptedException
+	- when a thread is in waiting 
+- Producer Comsumer problem
+
+
+## 14th November
+- Access system variable with properties
+- DDL, DML queries
+- Handling .json and .xml files
