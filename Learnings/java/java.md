@@ -1,4 +1,4 @@
-  
+   
 - Java is always pass-by-value.
 - Always the type is checked during the compile time. 
 
@@ -1919,7 +1919,7 @@ interface Supplier{
 |`limit`|Take first n elements|`stream.limit(5)`|
 |`skip`|Skip first n elements|`stream.skip(2)`|
 
-	- Terminal -- trigger evaluation
+	- Terminal -- trigger evaluation/execution of stream
 
 | Operation   | Return Type               | Example                               |
 | ----------- | ------------------------- | ------------------------------------- |
@@ -1957,7 +1957,7 @@ String val3 = optional.orElseThrow(() -> new IllegalStateException("missing"));
 - `of()` → throws `NullPointerException` if value is null
 - `ofNullable()` → allows null, returns empty optional if null
 - `empty()` → creates an empty Optional
-- `orElse(T other)` → return value if present, else `other`
+- `orElse(T other)` → return value if present, else return `other`
 - `orElseGet(Supplier<? extends T> other)` → lazily compute default
 - `orElseThrow()` → throw exception if empty
 

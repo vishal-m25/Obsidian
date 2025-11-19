@@ -4,41 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "e882066fe5085c5b",
+        "id": "7d1d979992002884",
         "type": "tabs",
         "children": [
           {
-            "id": "a2261e1ef245ed1b",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Learnings/java/java.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "java"
-            }
-          },
-          {
-            "id": "643f8b4441279412",
+            "id": "e4dc68c0827462dd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/java/Topics.md",
+                "file": "Learnings/SQL/SQL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Topics"
+              "title": "SQL"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -199,19 +182,21 @@
       "switcher:Open quick switcher": false
     }
   },
-  "active": "643f8b4441279412",
+  "active": "e4dc68c0827462dd",
   "lastOpenFiles": [
     "Learnings/java/java.md",
+    "Learnings/SQL/SQL.md",
     "Learnings/java/Topics.md",
+    "Learnings/SQL",
+    "Untitled.base",
+    "Untitled 1.base",
     "Learnings/java/java 8 to 11.md",
     "personal/Configurations.md",
     "Learnings/Servlet/Servlet.md",
     "Untitled 1.md",
-    "Untitled.md",
     "Learnings/Servlet/General.md",
     "Learnings/Servlet",
     "Learnings/java",
-    "Untitled.base",
     "2025-11-07.md",
     "Untitled.canvas",
     "Learnings/java/Assigned topics.md",
@@ -244,7 +229,6 @@
     "clg",
     "Learnings",
     "clg/Aptitude formulas.md",
-    "clg/Angular.md",
     "OOPs"
   ]
 }
