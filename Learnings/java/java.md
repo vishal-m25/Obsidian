@@ -1883,7 +1883,7 @@ public class FnInterface {
 	- **Consumer** -- when dealing width single argument         -- **`accept()`**
 	- **Predicate** -- when dealing with Boolean value                --  **`test()`**
 	- **Supplier** -- Does not take argument but returns value   --  **`get()`**
-	- **Function** --when dealing with single argument and in need of return functionality   -- **`apply()`**
+	- **Function** -- with single argument and in need of return functionality   -- **`apply()`**
 - __Created as an alternative for complex anonymous class__
 - advantages
 	- does not create `.class` file for every single usage.
@@ -1898,7 +1898,7 @@ interface Supplier{
 
 
 ### Stream API
-- Sequence of elements from a source.
+- Sequence of elements from a source to destination.
 - Supports function-style operations
 - Not a data structure and does not store elements in any format.
 - Operation are executed only when terminal operation is invoked.

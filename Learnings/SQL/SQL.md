@@ -15,6 +15,11 @@ The visual order of table is maintained through
 - It produces up-to-date data.
 - It can be queried just like any normal table.
 
+
+## Materialized view
+- Similar to view but stores the data corresponding to the view, so it does not need to run each time
+- It will be updated when explicitly refreshed.
+
 ## Joins
 - Natural join
 - Inner join
@@ -23,6 +28,15 @@ The visual order of table is maintained through
 - Right join
 - Full outer join
 - Cross join
+
+
+## Aggregate functions
+
+- SUM
+- AVG
+- MIN
+- MAX
+- COUNT
 
 ## Common Table Expression(CTE)
 - Creates a temporary view of a table specific to a query
@@ -102,3 +116,79 @@ This occurs due to;
 - Similar to truncate but deallocates all the pages
 - Physically remove the structure of the table from db
 - Remove the table from all the 
+
+
+
+## query execution time calculation
+
+- Server side
+```sql
+EXPLAIN ANALYZE SELECT * FROM my_table WHERE condition;
+```
+- Shows execution plan , step-by-step execution time
+
+
+
+- Client side
+```sql
+\timing 
+-- Now execute your query
+SELECT * FROM my_table WHERE condition;
+```
+- Starts a time on the client side and stops it when the result is returned
+
+
+
+## Ways to optimize queries
+- Create proper indexes.
+- Avoid ==**`select *`**==
+- Use ==**`EXISTS`**== instead of ==**`IN`**==
+- Avoid functions on indexed columns
+- Filter early (push restrictive conditions in subqueries)
+- Use limit or pagination 
+- Avoid using wildcards at the start (for searching)
+- Use joins instead of subquery
+- Remove unnecessary order by
+- Use proper data types
+- Partition large tables
+- Denormalize when needed
+- Use query caching / materialized views
+- Use UNION over OR
+- Use temporary tables for multi-joins
+- Limit text search columns
+
+
+## Pagination 
+- ### LIMIT N
+	- prints the first N records retrieved by the query.
+- ### OFFSET N
+	- skips the first N records of the retrieved result and prints rest
+
+By combining both, the concept of pagination can be implemented.
+
+
+
+## Normalization
+
+### 1NF
+- There should not be more than one value in a cell
+
+
+### 2NF
+- There can be composite key, but in a table there should not be a column that partially depend on composite key (it should be broken into different tables).
+- There can either be columns dependent only on primary key , or composite key, both are not allowed in the same table.
+
+### 3NF
+- Any non prime key should not depend on another non-prime key. The depending key can be a prime key from a candidate key.
+
+
+### BCNF
+- It is also knows as strict 3NF.
+- All determinants (left side in a relational representation) should be a super key.
+- Removes The depending key the can be a prime key from a candidate key.
+
+
+### 4NF
+- Multi valued dependencies are not allowed in here, there has to be separate table to handle multi value dependencies.
+
+
