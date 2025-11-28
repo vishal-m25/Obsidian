@@ -2,7 +2,21 @@
 - Java is always pass-by-value.
 - Always the type is checked during the compile time. 
 
-  
+
+## SOLID principles
+- Single responsibility
+	- a class should only have one responsibility (printing, writing, reading, each should have separate classes)
+- Open-Closed
+	- a class should be open for extension and closed for modification.
+	- extend a class instead of directly modifying it to add further features
+- Liskov substitution
+	-  **if class _A_ is a subtype of class _B_, we should be able to replace _B_ with _A_ without disrupting the behavior of our program.**
+- Interface segregation
+	- larger interface has to be broken into smaller one according to the classes we plan on creating.
+- Dependency inversion
+	- avoid strong coupling,
+	- when there is a possibility of an filed to change in feature, make it loosely coupled by not explictly declaring it in the concrete class. 
+
 ## Advantages of java 8  
 - Introduced lambda function  
 - Introduced default and static methods in interfaces  
@@ -1837,8 +1851,18 @@ try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
 - To avoid complex implementation of anonymous class lambda expression was introduced.
 - Since anonymous class creates a separate java file for each one .
 - So to deal it functionally and to pass code/logic as data lambda expression was introduced.
-- Lambda expressions are liked to a functional interface (Single Abstract Method)
-- It only captures effectively final variables.
+- Lambda expressions are linked to a functional interface (Single Abstract Method)
+- __Created as an alternative for complex anonymous class__
+- Variables that are either final or effectively final can only be used inside the definition
+- ==**this**== and ==**super**== can also be used inside the definition only when it refers to the enclosing class.
+
+**Disadvantages**
+- Readability reduces for bigger logics/code.
+- Cannot reuse
+- Hard to refactor
+- Hard to debug
+
+
 ```java 
 Runnable r = () -> System.out.println("Hello");
 r.run();
@@ -1877,17 +1901,18 @@ public class FnInterface {
 ### Functional interface
 - Functional Interfaces are mainly used for Lambda expressions, Method reference, and constructor references.  
 - In functional programming, code can be treated as data. For this purpose, Lambda expressions are introduced. They can be used to pass a block of code to another method or object. Functional Interface serves as a data type for Lambda expressions.  
+- It enforces stateless behavior.
 - Since a Functional interface contains only one abstract method, the implementation of that method becomes the code that gets passed as an argument to another method.  
 - Introduces to enable lambda function in interface  
 - Has only one abstract method irrespective of the other methods  
-	- **Consumer** -- when dealing width single argument         -- **`accept()`**
-	- **Predicate** -- when dealing with Boolean value                --  **`test()`**
-	- **Supplier** -- Does not take argument but returns value   --  **`get()`**
-	- **Function** -- with single argument and in need of return functionality   -- **`apply()`**
-- __Created as an alternative for complex anonymous class__
+	- **Consumer** -- when dealing width single argument                                 -- **`accept()`**
+	- **Predicate** -- when returning with Boolean value                                     --  **`test()`**
+	- **Supplier** -- Does not take argument but returns value                           --  **`get()`**
+	- **Function** -- with single argument and in need of return functionality    -- **`apply()`**
 - advantages
 	- does not create `.class` file for every single usage.
 	- removes the overriding `this` for local instead of it being used on enclosing class
+- When a definition is given the abstract method it is considered as a private static method, then the JVM instruction called ==**`invokedynamic`**== calls the method.
 
 ```java 
 @FunctionalInterface
@@ -1907,6 +1932,8 @@ interface Supplier{
 	- Sequential stream
 - Operations
 	- Intermediate --  return a new stream
+
+
 
 | Operation | Purpose | Example |
 |-|-|-|
@@ -1932,6 +1959,15 @@ interface Supplier{
 | `noneMatch` | `boolean`                 | `stream.noneMatch(x -> x < 0)`        |
 | `findFirst` | `Optional`                | `stream.findFirst()`                  |
 | `findAny`   | `Optional`                | `stream.findAny()`                    |
+
+**Drawbacks**
+- Hard to debug
+- Less readable for complex logic
+- Hard to handle checked exceptions
+- Parallelstreams can degrade performance at times
+- It cannot be re-used
+- Cannot make changes in the flow like loops with break, and continue.
+
 
 
 ### Optional Class

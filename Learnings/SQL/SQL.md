@@ -9,14 +9,75 @@ The visual order of table is maintained through
 - B-tree navigation  -- Connects pages for tables with clustered indexes.
 - Page pointers (nextpagepointer, prevpagepointer)
 
-## Views
+## Data Types
+- Numbers
+	- int
+	- bigint
+	- smallint
+	- numeric
+	- numeric(precisionm, scale)
+	- real
+	- double
+	- decimal
+	- float
+	- serial
+	- bigserial
+- Monetary (money)
+	- money
+- Characterss
+	- char
+	- varchar
+	- text
+- Binary
+	- bytea
+- Date/time
+	- date
+	- time
+	- timestamp
+	- interval
+- Boolean
+- Enum
+
+### Auto increments
+- While inserting values need not mention the column or give ==**`DEFAULT`**== as its value.
+- Serial 
+	- utilizes the previous record id to increment
+	- can directly give an id while inserting a row
+- Identical 
+	- utilizes the previous record value to increment
+	- does not allow user to send id while inserting into table
+- Sequence
+	- a variable is created for the table 
+	- uses and updates the variable to calculate the value
+```sql
+create table table_name( id int serial primary key, name char);
+
+create table table_name(id int generated always as identity primary key);
+```
+
+## UPSERT 
+- It is a an operation where a recorded, but when it is already present it just updates the value.
+- It not only does the the above mechanism, it can be used like try-catch block
+```sql
+INSERT INTO products (product_id, name, price)
+VALUES (101, 'Laptop Pro', 1200.00)
+ON CONFLICT (product_id)
+DO UPDATE SET
+    name = EXCLUDED.name,
+    price = EXCLUDED.price;
+```
+
+
+
+## VIEWS
+### Views
 - It is a virtual table where the corresponding query is saved, and dynamically executed when the view is called upon.
-- The data itself is not stored.
+- The data/table itself is not stored.
 - It produces up-to-date data.
 - It can be queried just like any normal table.
 
 
-## Materialized view
+### Materialized view
 - Similar to view but stores the data corresponding to the view, so it does not need to run each time
 - It will be updated when explicitly refreshed.
 
@@ -29,6 +90,26 @@ The visual order of table is maintained through
 - Full outer join
 - Cross join
 
+## Keywords
+
+### Returning keyword
+The `RETURNING` clause allows you to return the modified rows **as part of the DML command itself**, eliminating the need for a separate `SELECT` query. This offers two main benefits:
+
+1. **Atomicity and Consistency:** You get the values generated during the single, atomic operation, avoiding potential race conditions that could occur if you performed the DML and a separate `SELECT`.
+2. **Efficiency:** It reduces database round trips, improving application performance.
+
+### LATERAL keyword
+- Used after joins , before subquery to allow the access of columns from outside to inside the subquery.
+- Used after a join and followed by a subquery
+
+### comment
+- To give a description for a table
+```sql
+Comment on table_name is 'this is a user table'
+```
+
+
+
 
 ## Aggregate functions
 
@@ -39,14 +120,15 @@ The visual order of table is maintained through
 - COUNT
 
 ## Common Table Expression(CTE)
+- It is preferable when the level is unknown, in the same or different table and if the dependency keeps growing hierarchaly then this is more suitable.
 - Creates a temporary view of a table specific to a query
 - It helps avoid the complex readability in subquery
 - There is two type of queries present in this
 	- anchor query (first query )
 	- Recursive query ( all the queries that follow after union or union all)
 - The recursive queries are repeated until it does not return any rows to the table 
-- A recursive CTE accepts wither ==UNION== or ==UNION ALL== 
-- Using cte reference directly in recursive query can lead to infinite loop;
+- A recursive CTE accepts either ==UNION== or ==UNION ALL== 
+- Using CTE reference directly in recursive query can lead to infinite loop;
 - **UNION** 
 	- Allows only the unique value to exits all the duplicate values are removed
 - **UNOIN ALL**
@@ -97,8 +179,10 @@ This occurs due to;
 - Soft deleting parent before the child
 - Not updating the change in reference from parent to child
 
-
-
+## CASCADE delete
+- Used in foreign key constraint.
+- It help in avoiding orphan child problem
+- When the records in the reference table is deleted corresponding records in the referring table as well be deleted.
 
 ## Truncate working
 - It takes O(1) 
@@ -112,10 +196,14 @@ This occurs due to;
 - Can be overwritten when a suitable record is inserted.
 
 
+## Partition by
+- Creates separate table for each distinct value or range of date or time or value in the partitioned column.
+- We need to manually create tables and instruct which table should take in which values.
+
 ## Drop 
 - Similar to truncate but deallocates all the pages
 - Physically remove the structure of the table from db
-- Remove the table from all the 
+- Remove the table.
 
 
 
@@ -145,8 +233,8 @@ SELECT * FROM my_table WHERE condition;
 - Use ==**`EXISTS`**== instead of ==**`IN`**==
 - Avoid functions on indexed columns
 - Filter early (push restrictive conditions in subqueries)
-- Use limit or pagination 
-- Avoid using wildcards at the start (for searching)
+- Use limit or pagination(limit + offset)
+- Avoid using wildcards at the start (when searching)
 - Use joins instead of subquery
 - Remove unnecessary order by
 - Use proper data types
@@ -165,6 +253,12 @@ SELECT * FROM my_table WHERE condition;
 	- skips the first N records of the retrieved result and prints rest
 
 By combining both, the concept of pagination can be implemented.
+
+
+
+## INHERITS
+- On using this keyword in a table creation it states that it is child if a table.
+- So when a select query is executed on a parent table, unless the ==**`only`**== keyword is used after from, the query will search the entire hierarchy.
 
 
 
@@ -192,3 +286,8 @@ By combining both, the concept of pagination can be implemented.
 - Multi valued dependencies are not allowed in here, there has to be separate table to handle multi value dependencies.
 
 
+## Date
+- Use ==**`::date`**==  after the date when you need to apply interval for date
+```sql
+select * from sample where join_data>= '4-4-2000'::date + interval '10 year';
+```
