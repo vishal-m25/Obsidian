@@ -38,48 +38,36 @@ The visual order of table is maintained through
 - Boolean
 - Enum
 
-### Auto increments
-- While inserting values need not mention the column or give ==**`DEFAULT`**== as its value.
-- Serial 
-	- utilizes the previous record id to increment
-	- can directly give an id while inserting a row
-- Identical 
-	- utilizes the previous record value to increment
-	- does not allow user to send id while inserting into table
-- Sequence
-	- a variable is created for the table 
-	- uses and updates the variable to calculate the value
-```sql
-create table table_name( id int serial primary key, name char);
 
-create table table_name(id int generated always as identity primary key);
-```
+## Select 
 
-## UPSERT 
-- It is a an operation where a recorded, but when it is already present it just updates the value.
-- It not only does the the above mechanism, it can be used like try-catch block
-```sql
-INSERT INTO products (product_id, name, price)
-VALUES (101, 'Laptop Pro', 1200.00)
-ON CONFLICT (product_id)
-DO UPDATE SET
-    name = EXCLUDED.name,
-    price = EXCLUDED.price;
-```
-
-
-
-## VIEWS
-### Views
-- It is a virtual table where the corresponding query is saved, and dynamically executed when the view is called upon.
-- The data/table itself is not stored.
-- It produces up-to-date data.
-- It can be queried just like any normal table.
+### keywords & modifiers:
+- `DISTINCT`
+- `DISTINCT ON (columns)`
+- `*`
+- `AS`
+- Functions:
+    - `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`
+    - Window:
+        - `OVER (PARTITION BY ... ORDER BY ... ROWS BETWEEN ...)`
+- Filtering:
+    - `IN`
+    - `NOT IN`
+    - `EXISTS`
+    - `NOT EXISTS`
+    - `BETWEEN`
+    - `LIKE`, `ILIKE` (ignore case)
+    - `IS NULL`, `IS NOT NULL`
+    - `CASE WHEN THEN ELSE END`
+- Joins:
+- Set operations
+    - `UNION`, `UNION ALL`
+    - `INTERSECT`
+    - `EXCEPT`
+- Sorting
+    - `NULLS FIRST | LAST`
 
 
-### Materialized view
-- Similar to view but stores the data corresponding to the view, so it does not need to run each time
-- It will be updated when explicitly refreshed.
 
 ## Joins
 - Natural join
@@ -89,6 +77,9 @@ DO UPDATE SET
 - Right join
 - Full outer join
 - Cross join
+```sql
+select * from employees,user; --creates a cross join of the two tables, can also mention columns to join on
+```
 
 ## Keywords
 
@@ -98,8 +89,15 @@ The `RETURNING` clause allows you to return the modified rows **as part of the D
 1. **Atomicity and Consistency:** You get the values generated during the single, atomic operation, avoiding potential race conditions that could occur if you performed the DML and a separate `SELECT`.
 2. **Efficiency:** It reduces database round trips, improving application performance.
 
+```sql
+insert into users values (7,'asdf') returning id,name;
+insert into users values (2,'bob') returning new;
+insert into users values (3,'carry') returning old;
+insert into users values (6,'anny') returning *;
+```
+
 ### LATERAL keyword
-- Used after joins , before subquery to allow the access of columns from outside to inside the subquery.
+- Used after join, before subquery to allow the access to columns from outside to inside of the subquery.
 - Used after a join and followed by a subquery
 
 ### comment
@@ -119,11 +117,59 @@ Comment on table_name is 'this is a user table'
 - MAX
 - COUNT
 
+
+
+### Auto increments
+- While inserting values need not mention the column or give ==**`DEFAULT`**== as its value.
+- Serial 
+	- utilizes the previous record id to increment
+	- can directly give an id while inserting a row
+- Identical 
+	- utilizes the previous record value to increment
+	- does not allow user to send id while inserting into table
+- Sequence
+	- a variable is created for the table 
+	- uses and updates the variable to calculate the value
+```sql
+create table table_name( id int serial primary key, name char);
+
+create table table_name(id int generated always as identity primary key);
+```
+
+## UPSERT 
+- It is a mechanism used to update values, if it does not exist the record is inserted.
+- It can be used like try-catch block
+```sql
+INSERT INTO products (product_id, name, price)
+VALUES (101, 'Laptop Pro', 1200.00)
+ON CONFLICT (product_id)
+DO UPDATE SET
+    name = EXCLUDED.name,
+    price = EXCLUDED.price;
+```
+
+
+
+
+
+## VIEWS
+### Views
+- It is a virtual table where the corresponding query is saved, and dynamically executed when the view is called upon.
+- The data/table itself is not stored.
+- It produces up-to-date data.
+- It can be queried just like any normal table.
+
+
+### Materialized view
+- Similar to view but stores the data corresponding to the view, so it does not need to run each time
+- It will be updated when explicitly refreshed.
+
+
 ## Common Table Expression(CTE)
-- It is preferable when the level is unknown, in the same or different table and if the dependency keeps growing hierarchaly then this is more suitable.
-- Creates a temporary view of a table specific to a query
-- It helps avoid the complex readability in subquery
-- There is two type of queries present in this
+- It is preferable when the level is unknown, in the same or different table and if the dependency keeps growing hierarchy then this is more suitable.
+- Creates a temporary view of a table specific to a query.
+- It helps avoid the complex readability in subquery.
+- There is two type of queries present in CTE.
 	- anchor query (first query )
 	- Recursive query ( all the queries that follow after union or union all)
 - The recursive queries are repeated until it does not return any rows to the table 
@@ -133,6 +179,28 @@ Comment on table_name is 'this is a user table'
 	- Allows only the unique value to exits all the duplicate values are removed
 - **UNOIN ALL**
 	- Allows all the values without any restriction ( duplicates are allowed).
+	- it is mostly preferred in CTE due to less odds of having duplicate values in hierarchy based table.
+
+```sql
+WITH RECURSIVE subordinates AS (
+SELECT employee_id, manager_id, full_name, 0 as level
+FROM employees
+WHERE manager_id IS NULL
+UNION ALL
+SELECT e.employee_id, e.manager_id, e.full_name, level+1
+FROM employees e
+INNER JOIN subordinates s ON s.employee_id = e.manager_id
+)  
+SELECT * FROM subordinates;
+```
+
+## Indexing
+
+### Unique index
+- Starts with ==**`create unique index`**== 
+- Effective on columns that only have unique values
+
+
 
 
 
@@ -154,6 +222,7 @@ Comment on table_name is 'this is a user table'
 	- in postgres the columns included in select should either be present in group by or with aggregate function.( to have deterministic solution)
 - ==**`HAVING`**==
 	- conditions to apply on aggregated results
+- ==**`SELECT`**==
 - ==**`DISTINCT`**== 
 	- removes the duplicate rows
 - ==**`ORDER BY`**==
@@ -184,7 +253,11 @@ This occurs due to;
 - It help in avoiding orphan child problem
 - When the records in the reference table is deleted corresponding records in the referring table as well be deleted.
 
-## Truncate working
+```sql
+create table parent(id int primary key,name varchar(20)) on delete cascade;
+```
+
+## Truncate 
 - It takes O(1) 
 - The query straight away marks the pages as empty logically and add the pages to free space
 - Does not delete the values physically
@@ -199,11 +272,41 @@ This occurs due to;
 ## Partition by
 - Creates separate table for each distinct value or range of date or time or value in the partitioned column.
 - We need to manually create tables and instruct which table should take in which values.
+- The cannot be two individual partition in a same table (on two different columns);
+
+```sql
+select id,name,department, max(salary) over(partition by (department)) as max from employees order by max desc; -- for select query
+
+
+
+```
 
 ## Drop 
 - Similar to truncate but deallocates all the pages
-- Physically remove the structure of the table from db
-- Remove the table.
+- Physically remove the structure of the table from DB
+
+## INHERITS
+- On using this keyword in a table creation it states that it is child if a table.
+- So when a select query is executed on a parent table, unless the ==**`only`**== keyword is used after from, the query will search the entire hierarchy.
+
+
+## Transactions
+- Used to group a set of queries as one atomic query.
+- When you need to execute a set of queries sequentially without other queries interrupting then write it inside a Begin.. End .
+- Procedures usually store transactions.
+- Exception can be used to handle error/exception and handle it internally or rollback the transaction.
+```sql
+CREATE PROCEDURE safe_insert(p_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO table VALUES (p_id);
+EXCEPTION 
+    WHEN unique_violation THEN
+        ROLLBACK --either cancel the entire transaction or handle it internally
+END;
+$$;
+```
 
 
 
@@ -256,10 +359,6 @@ By combining both, the concept of pagination can be implemented.
 
 
 
-## INHERITS
-- On using this keyword in a table creation it states that it is child if a table.
-- So when a select query is executed on a parent table, unless the ==**`only`**== keyword is used after from, the query will search the entire hierarchy.
-
 
 
 ## Normalization
@@ -291,3 +390,19 @@ By combining both, the concept of pagination can be implemented.
 ```sql
 select * from sample where join_data>= '4-4-2000'::date + interval '10 year';
 ```
+
+
+
+## RULE
+- In can be used on both table and view.
+- It is only to guide errors from occurring.
+- Can be used on view, when someone try to insert into view, we can create a rule that if it is tried insert into the real table.
+```sql
+CREATE RULE v_upd AS
+ON UPDATE TO view_emp
+DO INSTEAD
+UPDATE employees
+SET name = NEW.name
+WHERE id = OLD.id;
+```
+

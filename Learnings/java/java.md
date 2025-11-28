@@ -1933,8 +1933,6 @@ interface Supplier{
 - Operations
 	- Intermediate --  return a new stream
 
-
-
 | Operation | Purpose | Example |
 |-|-|-|
 |`filter`| Keep elements matching a predicate|`stream.filter(x -> x > 10)`|
